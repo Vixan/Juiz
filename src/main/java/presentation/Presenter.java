@@ -12,10 +12,16 @@ public class Presenter extends Application {
     }
 
     public void start(Stage primaryStage) throws Exception {
-        ConfigProperties configProperties = ConfigProperties.getInstance();
-        BorderPane rootPane = new BorderPane();
+        initStage(primaryStage);
+    }
 
-        Scene scene = new Scene(rootPane, configProperties.getWindowWidth(), configProperties.getWindowHeight());
+    private void initStage(Stage primaryStage) {
+        BorderPane rootPane = new BorderPane();
+        ConfigProperties configProps = ConfigProperties.getInstance();
+        Scene scene = new Scene(rootPane,
+                configProps.getWindowWidth(),
+                configProps.getWindowHeight());
+
         primaryStage.setScene(scene);
         primaryStage.show();
         primaryStage.setTitle("Juiz");
