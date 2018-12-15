@@ -1,5 +1,6 @@
 package shared.utils;
 
+
 import java.io.FileInputStream;
 import java.util.Properties;
 
@@ -7,7 +8,8 @@ public class ConfigProperties extends Properties {
     private static ConfigProperties instance = null;
     private static final String PROPERTIES_FILE_PATH = "src/main/resources/config.properties";
 
-    private ConfigProperties() {}
+    private ConfigProperties() {
+    }
 
     public static ConfigProperties getInstance() {
         if (instance == null) {
@@ -35,5 +37,23 @@ public class ConfigProperties extends Properties {
         String height = instance.getProperty("WINDOW_HEIGHT");
 
         return (height != null) ? Integer.parseInt(height) : 800;
+    }
+
+    public String getDbPath() {
+        String dbPath = instance.getProperty("DB_PATH");
+
+        return (dbPath != null) ? dbPath : "tmp/test.db";
+    }
+
+    public String getDbUsername() {
+        String username = instance.getProperty("DB_USERNAME");
+
+        return (username != null) ? username : "admin";
+    }
+
+    public String getDbPassword() {
+        String password = instance.getProperty("DB_PASSWORD");
+
+        return (password != null) ? password : "admin";
     }
 }
