@@ -1,6 +1,5 @@
 package shared.utils;
 
-
 import java.io.FileInputStream;
 import java.util.Properties;
 
@@ -25,6 +24,12 @@ public class ConfigProperties extends Properties {
         }
 
         return instance;
+    }
+
+    public String getWindowTitle() {
+        String title = instance.getProperty("WINDOW_TITLE");
+
+        return (title != null) ? title : "Juiz";
     }
 
     public int getWindowWidth() {
