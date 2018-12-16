@@ -5,9 +5,9 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import persistence.abstractions.Repository;
-
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.List;
 
 public class HbnRepository<T> implements Repository<T> {
@@ -17,22 +17,6 @@ public class HbnRepository<T> implements Repository<T> {
 
     public HbnRepository(Class<T> type) {
         this.type = type;
-    }
-
-    public Session getCurrentSession() {
-        return currentSession;
-    }
-
-    public void setCurrentSession(Session currentSession) {
-        this.currentSession = currentSession;
-    }
-
-    public Transaction getCurrentTransaction() {
-        return currentTransaction;
-    }
-
-    public void setCurrentTransaction(Transaction currentTransaction) {
-        this.currentTransaction = currentTransaction;
     }
 
     private static SessionFactory getSessionFactory(Class annotationClass) {
@@ -57,24 +41,36 @@ public class HbnRepository<T> implements Repository<T> {
     public List<T> getAll() {
         CriteriaBuilder criteriaBuilder = currentSession.getCriteriaBuilder();
         CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(type);
-        List<T> collection = getCurrentSession().createQuery(criteriaQuery).getResultList();
+        Root<T> quizRoot = criteriaQuery.from(type);
+        criteriaQuery.select(quizRoot);
+        List<T> collection = currentSession.createQuery(criteriaQuery).getResultList();
 
         return collection;
     }
 
+    public void openCurrentSessionWithTransaction() {
+        currentSession = getSessionFactory(type).openSession();
+        currentTransaction = currentSession.beginTransaction();
+    }
+
+    public void closeCurrentSessionWithTransaction() {
+        currentTransaction.commit();
+        currentSession.close();
+    }
+
     public T getById(Integer id) {
-        return getCurrentSession().get(type, id);
+        return currentSession.get(type, id);
     }
 
     public void add(T entity) {
-        getCurrentSession().save(entity);
+        currentSession.save(entity);
     }
 
     public void update(T entity) {
-        getCurrentSession().update(entity);
+        currentSession.update(entity);
     }
 
     public void delete(T entity) {
-        getCurrentSession().delete(entity);
+        currentSession.delete(entity);
     }
 }

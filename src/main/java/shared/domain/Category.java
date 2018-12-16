@@ -6,17 +6,23 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Column;
 import javax.persistence.Table;
+import javax.persistence.OneToMany;
+import javax.persistence.CascadeType;
+import java.util.Set;
 
 @Entity
-@Table
+@Table(name = "category")
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "CATEGORY_ID")
+    @Column(name = "category_id")
     private Integer id;
 
-    @Column(length = 32)
+    @Column(name="category_name")
     private String name;
+
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
+    private Set<Quiz> quizzes;
 
     public String getName() {
         return name;

@@ -8,17 +8,17 @@ import javax.persistence.Column;
 import javax.persistence.Table;
 
 @Entity
-@Table
+@Table(name = "difficulty")
 public class Difficulty {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "DIFFICULTY_ID")
+    @Column(name = "difficulty_id")
     private Integer id;
 
-    @Column(length = 32)
+    @Column(name = "difficulty_name")
     private String name;
 
-    @Column
+    @Column(name = "difficulty_modifier")
     private Float modifier;
 
     public String getName() {

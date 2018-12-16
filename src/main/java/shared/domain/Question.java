@@ -3,18 +3,18 @@ package shared.domain;
 import javax.persistence.*;
 
 @Entity
-@Table
+@Table(name = "question")
 public class Question {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "QUESTION_ID")
+    @Column(name = "question_id")
     private Integer id;
 
-    @Column(length = 32)
+    @Column(name = "question_name")
     private String name;
 
     @ManyToOne
-    @JoinColumn(name = "QUIZ_ID")
+    @JoinColumn(name = "quiz_id")
     private Quiz quiz;
 
     public String getName() {
