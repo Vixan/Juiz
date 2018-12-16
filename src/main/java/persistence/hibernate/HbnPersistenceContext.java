@@ -1,29 +1,18 @@
 package persistence.hibernate;
 
 import org.mindrot.jbcrypt.BCrypt;
-import persistence.abstractions.CategoryRepository;
-import persistence.abstractions.PersistenceContext;
-import persistence.abstractions.QuizRepository;
 import shared.domain.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class HbnPersistenceContext implements PersistenceContext {
+public class HbnPersistenceContext {
     private HbnCategoryRepository categoryRepository = new HbnCategoryRepository();
     private HbnUserRepository userRepository = new HbnUserRepository();
     private HbnDifficultyRepository difficultyRepository = new HbnDifficultyRepository();
     private HbnQuizRepository quizRepository = new HbnQuizRepository();
     private HbnQuestionRepository questionRepository = new HbnQuestionRepository();
     private HbnAnswerRepository answerRepository = new HbnAnswerRepository();
-
-    public QuizRepository getQuizRepository() {
-        return quizRepository;
-    }
-
-    public CategoryRepository getCategoryRepository() {
-        return categoryRepository;
-    }
 
     public void initializeData() {
         quizRepository.openCurrentSession();

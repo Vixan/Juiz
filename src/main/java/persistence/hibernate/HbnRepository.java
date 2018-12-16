@@ -8,7 +8,7 @@ import persistence.abstractions.Repository;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import java.util.List;
+import java.util.Collection;
 
 public class HbnRepository<T> implements Repository<T> {
     private Session currentSession;
@@ -17,6 +17,22 @@ public class HbnRepository<T> implements Repository<T> {
 
     public HbnRepository(Class<T> type) {
         this.type = type;
+    }
+
+    public Session getCurrentSession() {
+        return currentSession;
+    }
+
+    public void setCurrentSession(Session currentSession) {
+        this.currentSession = currentSession;
+    }
+
+    public Transaction getCurrentTransaction() {
+        return currentTransaction;
+    }
+
+    public void setCurrentTransaction(Transaction currentTransaction) {
+        this.currentTransaction = currentTransaction;
     }
 
     private static SessionFactory getSessionFactory(Class annotationClass) {
@@ -38,14 +54,13 @@ public class HbnRepository<T> implements Repository<T> {
         currentSession.close();
     }
 
-    public List<T> getAll() {
+    public Collection<T> getAll() {
         CriteriaBuilder criteriaBuilder = currentSession.getCriteriaBuilder();
         CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(type);
         Root<T> quizRoot = criteriaQuery.from(type);
         criteriaQuery.select(quizRoot);
-        List<T> collection = currentSession.createQuery(criteriaQuery).getResultList();
 
-        return collection;
+        return currentSession.createQuery(criteriaQuery).getResultList();
     }
 
     public void openCurrentSessionWithTransaction() {
