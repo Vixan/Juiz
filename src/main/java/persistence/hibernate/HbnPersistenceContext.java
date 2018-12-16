@@ -1,5 +1,6 @@
 package persistence.hibernate;
 
+import org.mindrot.jbcrypt.BCrypt;
 import persistence.abstractions.CategoryRepository;
 import persistence.abstractions.PersistenceContext;
 import persistence.abstractions.QuizRepository;
@@ -46,7 +47,8 @@ public class HbnPersistenceContext implements PersistenceContext {
         for (String[] userData : initialUserData) {
             User user = new User();
             user.setName(userData[0]);
-            user.setPassword(userData[1]);
+            String hashedPassword = BCrypt.hashpw(userData[1], BCrypt.gensalt());
+            user.setPassword(hashedPassword);
             initialUsers.add(user);
             userRepository.add(user);
         }
