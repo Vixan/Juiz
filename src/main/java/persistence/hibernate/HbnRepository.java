@@ -5,6 +5,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import persistence.abstractions.Repository;
+
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -36,18 +37,14 @@ public class HbnRepository<T> implements Repository<T> {
     }
 
     private static SessionFactory getSessionFactory(Class annotationClass) {
-        SessionFactory sessionFactory = new Configuration()
+        return new Configuration()
                 .configure()
                 .addAnnotatedClass(annotationClass)
                 .buildSessionFactory();
-
-        return sessionFactory;
     }
 
-    public Session openCurrentSession() {
+    public void openCurrentSession() {
         currentSession = getSessionFactory(type).openSession();
-
-        return currentSession;
     }
 
     public void closeCurrentSession() {
