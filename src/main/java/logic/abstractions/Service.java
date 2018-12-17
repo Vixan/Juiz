@@ -8,5 +8,5 @@ public interface Service<T> {
 
     void add(T entity);
     void update(T entity);
-    void delete(T entity);
+    void delete(Integer entity);
 }

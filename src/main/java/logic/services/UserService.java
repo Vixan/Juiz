@@ -26,18 +26,35 @@ public class UserService implements Service<User> {
     }
 
     public Collection<User> getAll() {
-        return null;
+        userRepository.openCurrentSession();
+        Collection<User> users = userRepository.getAll();
+        userRepository.closeCurrentSession();
+
+        return users;
     }
 
-    public void add(User entity) {
-
+    public void add(User user) {
+        userRepository.openCurrentSessionWithTransaction();
+        if (userRepository.getByName(user.getName()) == null) {
+            userRepository.add(user);
+        }
+        userRepository.closeCurrentSessionWithTransaction();
     }
 
-    public void update(User entity) {
-
+    public void update(User user) {
+        userRepository.openCurrentSessionWithTransaction();
+        if (userRepository.getById(user.getId()) != null) {
+            userRepository.update(user);
+        }
+        userRepository.closeCurrentSessionWithTransaction();
     }
 
-    public void delete(User entity) {
-
+    public void delete(Integer userId) {
+        userRepository.openCurrentSessionWithTransaction();
+        User user = userRepository.getById(userId);
+        if (user != null) {
+            userRepository.delete(user);
+        }
+        userRepository.closeCurrentSessionWithTransaction();
     }
 }

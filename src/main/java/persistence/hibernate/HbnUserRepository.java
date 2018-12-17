@@ -8,6 +8,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.ParameterExpression;
 import javax.persistence.criteria.Root;
+import java.util.List;
 
 public class HbnUserRepository extends HbnRepository<User> implements UserRepository {
     public HbnUserRepository() {
@@ -27,6 +28,13 @@ public class HbnUserRepository extends HbnRepository<User> implements UserReposi
         TypedQuery<User> typedQuery = getCurrentSession().createQuery(criteriaQuery);
         typedQuery.setParameter(params, userName);
 
-        return typedQuery.getResultList().get(0);
+        List<User> usersWithSearchedName = typedQuery.getResultList();
+        User user = null;
+
+        if (usersWithSearchedName.size() > 0) {
+            user = usersWithSearchedName.get(0);
+        }
+
+        return user;
     }
 }
