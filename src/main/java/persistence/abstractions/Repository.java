@@ -1,9 +1,9 @@
 package persistence.abstractions;
 
-import java.util.Collection;
+import java.util.List;
 
 public interface Repository<T> {
-    Collection<T> getAll();
+    List<T> getAll();
     T getById(Integer id);
     void add(T entity);
     void update(T entity);

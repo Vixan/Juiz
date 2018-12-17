@@ -5,7 +5,9 @@ import org.hibernate.Hibernate;
 import persistence.hibernate.HbnQuizRepository;
 import shared.domain.Quiz;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 public class QuizService implements Service<Quiz> {
     private HbnQuizRepository quizRepository = new HbnQuizRepository();
@@ -14,15 +16,19 @@ public class QuizService implements Service<Quiz> {
         quizRepository.openCurrentSession();
         Quiz quiz = quizRepository.getById(quizId);
         Hibernate.initialize(quiz.getQuestions());
+        quiz.getQuestions().forEach(question -> Hibernate.initialize(question.getAnswers()));
         quizRepository.closeCurrentSession();
 
         return quiz;
     }
 
-    public Collection<Quiz> getAll() {
+    public List<Quiz> getAll() {
         quizRepository.openCurrentSession();
-        Collection<Quiz> quizzes = quizRepository.getAll();
-        quizzes.forEach(quiz -> {Hibernate.initialize(quiz.getQuestions());});
+        List<Quiz> quizzes = new ArrayList<>(quizRepository.getAll());
+        quizzes.forEach(quiz -> {
+            Hibernate.initialize(quiz.getQuestions());
+            quiz.getQuestions().forEach(question -> Hibernate.initialize(question.getAnswers()));
+        });
         quizRepository.closeCurrentSession();
 
         return quizzes;

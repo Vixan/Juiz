@@ -4,7 +4,9 @@ import logic.abstractions.Service;
 import persistence.hibernate.HbnUserRepository;
 import shared.domain.User;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 public class UserService implements Service<User> {
     private HbnUserRepository userRepository = new HbnUserRepository();
@@ -25,9 +27,9 @@ public class UserService implements Service<User> {
         return user;
     }
 
-    public Collection<User> getAll() {
+    public List<User> getAll() {
         userRepository.openCurrentSession();
-        Collection<User> users = userRepository.getAll();
+        List<User> users = new ArrayList<>(userRepository.getAll());
         userRepository.closeCurrentSession();
 
         return users;

@@ -1,6 +1,7 @@
 package shared.domain;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "question")
@@ -17,6 +18,9 @@ public class Question {
     @JoinColumn(name = "quiz_id")
     private Quiz quiz;
 
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
+    private Set<Answer> answers;
+
     public String getName() {
         return name;
     }
@@ -31,5 +35,9 @@ public class Question {
 
     public void setQuiz(Quiz quiz) {
         this.quiz = quiz;
+    }
+
+    public Set<Answer> getAnswers() {
+        return answers;
     }
 }

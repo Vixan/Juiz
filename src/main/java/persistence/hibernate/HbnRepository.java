@@ -10,6 +10,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.Collection;
+import java.util.List;
 
 public class HbnRepository<T> implements Repository<T> {
     private Session currentSession;
@@ -51,7 +52,7 @@ public class HbnRepository<T> implements Repository<T> {
         currentSession.close();
     }
 
-    public Collection<T> getAll() {
+    public List<T> getAll() {
         CriteriaBuilder criteriaBuilder = currentSession.getCriteriaBuilder();
         CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(type);
         Root<T> quizRoot = criteriaQuery.from(type);

@@ -4,8 +4,6 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import logic.services.QuizService;
-import shared.domain.Quiz;
 import shared.utils.ConfigProperties;
 
 public class Presenter extends Application {
@@ -15,10 +13,6 @@ public class Presenter extends Application {
 
     public void start(Stage primaryStage) {
         initStage(primaryStage);
-
-        QuizService quizService = new QuizService();
-        Quiz quiz = quizService.getById(9);
-        System.out.println(quiz.getQuestions().size());
     }
 
     private void initStage(Stage primaryStage) {
