@@ -28,14 +28,13 @@ public class HbnQuizRepository extends HbnRepository<Quiz> implements QuizReposi
         TypedQuery<Quiz> typedQuery = getCurrentSession().createQuery(criteriaQuery);
         typedQuery.setParameter(params, quizName);
 
-        List<Quiz> quizzesWithSearchedName = typedQuery.getResultList();
+        List<Quiz> searchedQuizzes = typedQuery.getResultList();
         Quiz quiz = null;
 
-        if (quizzesWithSearchedName.size() > 0) {
-            quiz = quizzesWithSearchedName.get(0);
+        if (searchedQuizzes.size() > 0) {
+            quiz = searchedQuizzes.get(0);
         }
 
         return quiz;
     }
-
 }

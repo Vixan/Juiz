@@ -11,6 +11,7 @@ import java.util.List;
 public class UserService implements Service<User> {
     private HbnUserRepository userRepository = new HbnUserRepository();
 
+    @Override
     public User getById(Integer userId) {
         userRepository.openCurrentSession();
         User user = userRepository.getById(userId);
@@ -27,6 +28,7 @@ public class UserService implements Service<User> {
         return user;
     }
 
+    @Override
     public List<User> getAll() {
         userRepository.openCurrentSession();
         List<User> users = new ArrayList<>(userRepository.getAll());
@@ -35,6 +37,7 @@ public class UserService implements Service<User> {
         return users;
     }
 
+    @Override
     public void add(User user) {
         userRepository.openCurrentSessionWithTransaction();
         if (userRepository.getByName(user.getName()) == null) {
@@ -43,6 +46,7 @@ public class UserService implements Service<User> {
         userRepository.closeCurrentSessionWithTransaction();
     }
 
+    @Override
     public void update(User user) {
         userRepository.openCurrentSessionWithTransaction();
         if (userRepository.getById(user.getId()) != null) {
@@ -51,6 +55,7 @@ public class UserService implements Service<User> {
         userRepository.closeCurrentSessionWithTransaction();
     }
 
+    @Override
     public void delete(Integer userId) {
         userRepository.openCurrentSessionWithTransaction();
         User user = userRepository.getById(userId);

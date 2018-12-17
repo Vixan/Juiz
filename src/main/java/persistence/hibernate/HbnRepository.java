@@ -52,6 +52,7 @@ public class HbnRepository<T> implements Repository<T> {
         currentSession.close();
     }
 
+    @Override
     public List<T> getAll() {
         CriteriaBuilder criteriaBuilder = currentSession.getCriteriaBuilder();
         CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(type);
@@ -71,18 +72,22 @@ public class HbnRepository<T> implements Repository<T> {
         currentSession.close();
     }
 
+    @Override
     public T getById(Integer id) {
         return currentSession.get(type, id);
     }
 
+    @Override
     public void add(T entity) {
         currentSession.save(entity);
     }
 
+    @Override
     public void update(T entity) {
         currentSession.update(entity);
     }
 
+    @Override
     public void delete(T entity) {
         currentSession.delete(entity);
     }

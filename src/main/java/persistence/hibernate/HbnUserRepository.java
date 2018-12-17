@@ -28,11 +28,11 @@ public class HbnUserRepository extends HbnRepository<User> implements UserReposi
         TypedQuery<User> typedQuery = getCurrentSession().createQuery(criteriaQuery);
         typedQuery.setParameter(params, userName);
 
-        List<User> usersWithSearchedName = typedQuery.getResultList();
+        List<User> searchedUsers = typedQuery.getResultList();
         User user = null;
 
-        if (usersWithSearchedName.size() > 0) {
-            user = usersWithSearchedName.get(0);
+        if (searchedUsers.size() > 0) {
+            user = searchedUsers.get(0);
         }
 
         return user;

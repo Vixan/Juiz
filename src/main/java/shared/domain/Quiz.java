@@ -24,6 +24,10 @@ public class Quiz {
     @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL)
     private Set<Question> questions;
 
+    public Integer getId() {
+        return id;
+    }
+
     public String getName() {
         return name;
     }

@@ -6,12 +6,12 @@ import persistence.hibernate.HbnQuizRepository;
 import shared.domain.Quiz;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public class QuizService implements Service<Quiz> {
     private HbnQuizRepository quizRepository = new HbnQuizRepository();
 
+    @Override
     public Quiz getById(Integer quizId) {
         quizRepository.openCurrentSession();
         Quiz quiz = quizRepository.getById(quizId);
@@ -22,6 +22,7 @@ public class QuizService implements Service<Quiz> {
         return quiz;
     }
 
+    @Override
     public List<Quiz> getAll() {
         quizRepository.openCurrentSession();
         List<Quiz> quizzes = new ArrayList<>(quizRepository.getAll());
@@ -34,6 +35,7 @@ public class QuizService implements Service<Quiz> {
         return quizzes;
     }
 
+    @Override
     public void add(Quiz quiz) {
         quizRepository.openCurrentSessionWithTransaction();
         if (quizRepository.getByName(quiz.getName()) == null) {
@@ -42,14 +44,16 @@ public class QuizService implements Service<Quiz> {
         quizRepository.closeCurrentSessionWithTransaction();
     }
 
+    @Override
     public void update(Quiz quiz) {
         quizRepository.openCurrentSessionWithTransaction();
-        if (quizRepository.getByName(quiz.getName()) != null) {
+        if (quizRepository.getById(quiz.getId()) != null) {
             quizRepository.update(quiz);
         }
         quizRepository.closeCurrentSessionWithTransaction();
     }
 
+    @Override
     public void delete(Integer quizId) {
         quizRepository.openCurrentSessionWithTransaction();
         Quiz quiz = quizRepository.getById(quizId);

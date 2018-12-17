@@ -21,6 +21,10 @@ public class Difficulty {
     @Column(name = "difficulty_modifier")
     private Float modifier;
 
+    public Integer getId() {
+        return id;
+    }
+
     public String getName() {
         return name;
     }

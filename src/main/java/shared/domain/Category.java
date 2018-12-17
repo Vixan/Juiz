@@ -24,6 +24,10 @@ public class Category {
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
     private Set<Quiz> quizzes;
 
+    public Integer getId() {
+        return id;
+    }
+
     public String getName() {
         return name;
     }
