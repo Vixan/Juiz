@@ -5,7 +5,7 @@ import java.util.Properties;
 
 public class ConfigProperties extends Properties {
     private static ConfigProperties instance = null;
-    private static final String PROPERTIES_FILE_PATH = "src/main/resources/config.properties";
+    private static final String PROPERTIES_FILE_PATH = "src/main/resources/config/config.properties";
 
     private ConfigProperties() {
     }

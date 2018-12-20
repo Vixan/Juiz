@@ -9,6 +9,7 @@ import persistence.abstractions.Repository;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import java.io.File;
 import java.util.Collection;
 import java.util.List;
 
@@ -38,8 +39,10 @@ public class HbnRepository<T> implements Repository<T> {
     }
 
     private static SessionFactory getSessionFactory(Class annotationClass) {
+        File hibernateConfig = new File("src/main/resources/config/hibernate.cfg.xml");
+
         return new Configuration()
-                .configure()
+                .configure(hibernateConfig)
                 .addAnnotatedClass(annotationClass)
                 .buildSessionFactory();
     }
