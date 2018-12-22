@@ -3,6 +3,7 @@ package presentation;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -43,14 +44,19 @@ public class Presenter extends Application {
     private void showAuthentication() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("/presentation/auth/views/auth.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 600, 400);
+            fxmlLoader.setLocation(getClass().getResource("/presentation/auth/auth.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+
             Stage stage = new Stage();
-            stage.setTitle("New Window");
+            stage.setTitle("Juiz Authentication");
             stage.setScene(scene);
+//            stage.setResizable(false);
+            stage.setMinHeight(768);
+            stage.setMinWidth(1024);
+            stage.getIcons().add(new Image("/presentation/assets/juiz.icon.png"));
             stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
     }
 }

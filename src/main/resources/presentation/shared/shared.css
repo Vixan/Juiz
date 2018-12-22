@@ -1,0 +1,41 @@
+* {
+    -color-light: #ffffff;
+    -color-primary: #ffbca6;
+    -color-secondary: #eeeeee;
+    -color-ternary: #4d1f4d;
+
+    -fx-font-family: "Quicksand";
+}
+
+.input {
+    -fx-background-color: -color-secondary;
+    -fx-background-insets: 0;
+    -fx-padding: 5 20 5 20;
+    -fx-border-radius: 50 50 50 50;
+    -fx-background-radius: 50 50 50 50;
+}
+
+.input:focused {
+}
+
+.button {
+    -fx-background-color: -color-secondary;
+    -fx-background-insets: 0;
+    -fx-border-radius: 50 50 50 50;
+    -fx-background-radius: 50 50 50 50;
+    -fx-padding: 5 20 5 20;
+}
+
+.button:hover {
+    -fx-background-color: -color-secondary;
+}
+
+.button.button-primary {
+    -fx-background-color: -color-primary;
+    -fx-text-fill: -color-light;
+}
+
+.button.button-primary:hover {
+    -fx-cursor: hand;
+    -fx-background-color: derive(-color-primary, +20%);
+}
