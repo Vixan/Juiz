@@ -6,3 +6,7 @@
     -fx-font-size: 28;
     -fx-text-fill: -color-ternary;
 }
+
+.auth__error {
+    -fx-text-fill: -color-error;
+}

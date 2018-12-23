@@ -20,25 +20,7 @@ public class Presenter extends Application {
     }
 
     public void start(Stage primaryStage) {
-        initStage(primaryStage);
         showAuthentication();
-    }
-
-    private void initStage(Stage primaryStage) {
-        int windowWidth = 800;
-        int windowHeight = 600;
-        String windowTitle = "Juiz";
-
-        if (configProperties != null) {
-            windowTitle = configProperties.getWindowTitle();
-            windowWidth = configProperties.getWindowWidth();
-            windowHeight = configProperties.getWindowHeight();
-        }
-
-//        Scene scene = new Scene(rootPane, windowWidth, windowHeight);
-//        primaryStage.setTitle(windowTitle);
-//        primaryStage.setScene(scene);
-//        primaryStage.show();
     }
 
     private void showAuthentication() {
@@ -46,13 +28,19 @@ public class Presenter extends Application {
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(getClass().getResource("/presentation/auth/auth.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
+            int windowWidth = 800;
+            int windowHeight = 600;
+
+            if (configProperties != null) {
+                windowWidth = configProperties.getWindowWidth();
+                windowHeight = configProperties.getWindowHeight();
+            }
 
             Stage stage = new Stage();
             stage.setTitle("Juiz Authentication");
             stage.setScene(scene);
-//            stage.setResizable(false);
-            stage.setMinHeight(768);
-            stage.setMinWidth(1024);
+            stage.setMinHeight(windowHeight);
+            stage.setMinWidth(windowWidth);
             stage.getIcons().add(new Image("/presentation/assets/juiz.icon.png"));
             stage.show();
         } catch (IOException ex) {

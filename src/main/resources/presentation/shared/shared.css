@@ -4,6 +4,7 @@
     -color-primary: #ffbca6;
     -color-secondary: #eeeeee;
     -color-ternary: #4d1f4d;
+    -color-error: #dd0000;
 
     -fx-font-family: "Quicksand";
     -fx-text-fill: -color-dark;
