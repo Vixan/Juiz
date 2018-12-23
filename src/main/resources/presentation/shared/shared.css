@@ -1,10 +1,12 @@
 * {
     -color-light: #ffffff;
+    -color-dark: #777777;
     -color-primary: #ffbca6;
     -color-secondary: #eeeeee;
     -color-ternary: #4d1f4d;
 
     -fx-font-family: "Quicksand";
+    -fx-text-fill: -color-dark;
 }
 
 .input {
@@ -13,9 +15,12 @@
     -fx-padding: 5 20 5 20;
     -fx-border-radius: 50 50 50 50;
     -fx-background-radius: 50 50 50 50;
+    -fx-border-width: 1;
+    -fx-border-color: transparent;
 }
 
 .input:focused {
+    -fx-border-color: derive(-color-ternary, +100%);
 }
 
 .button {

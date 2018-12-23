@@ -1,3 +1,8 @@
 .auth {
     -fx-background-color: -color-light;
 }
+
+.auth__title {
+    -fx-font-size: 28;
+    -fx-text-fill: -color-ternary;
+}
