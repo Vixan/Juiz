@@ -10,6 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import logic.services.AuthenticationService;
+import presentation.dashboard.DashboardController;
 import shared.domain.User;
 import shared.utils.ConfigProperties;
 
@@ -34,11 +35,11 @@ public class AuthenticationController {
         } else {
             Stage stage = (Stage) loginButton.getScene().getWindow();
             stage.close();
-            showDashboard();
+            showDashboard(user);
         }
     }
 
-    private void showDashboard() {
+    private void showDashboard(User user) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(getClass().getResource("/presentation/dashboard/dashboard.fxml"));
@@ -50,6 +51,9 @@ public class AuthenticationController {
                 windowWidth = configProperties.getWindowWidth();
                 windowHeight = configProperties.getWindowHeight();
             }
+
+            DashboardController dashboardController = fxmlLoader.getController();
+            dashboardController.setUser(user);
 
             Stage stage = new Stage();
             stage.setTitle("Juiz Dashboard");

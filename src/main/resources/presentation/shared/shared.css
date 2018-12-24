@@ -45,3 +45,37 @@
     -fx-cursor: hand;
     -fx-background-color: derive(-color-primary, +20%);
 }
+
+.button.button-secondary {
+    -fx-background-color: -color-secondary;
+    -fx-text-fill: -color-light;
+}
+
+.button.button-secondary:hover {
+    -fx-cursor: hand;
+    -fx-background-color: derive(-color-secondary, +20%);
+}
+
+.context-menu {
+    -fx-skin: "com.sun.javafx.scene.control.skin.ContextMenuSkin";
+    -fx-text-fill: -color-dark;
+    -fx-background-color: -color-light;
+    -fx-background-insets: 0;
+    -fx-border-width: 1;
+    -fx-border-color: -color-secondary;
+    -fx-effect: null;
+}
+
+.menu-item {
+    -fx-text-fill: -color-dark;
+}
+
+.menu-item:hover,
+.menu-item:focused {
+    -fx-background-color: -color-primary;
+}
+
+.menu-item:hover .label,
+.menu-item:focused .label {
+    -fx-text-fill: -color-light;
+}
