@@ -10,6 +10,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.control.ToggleGroup?>
 <VBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0"
       styleClass="dashboard" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="presentation.dashboard.DashboardController">
@@ -21,6 +22,9 @@
         <MenuButton fx:id="userButton" mnemonicParsing="false"
                     styleClass="button, button-secondary, dashboard__user-button" text="Username">
             <items>
+                <fx:define>
+                    <ToggleGroup fx:id="difficultyToggleGroup"/>
+                </fx:define>
                 <Menu fx:id="difficultySettingMenu" mnemonicParsing="false" text="Difficulty setting"/>
                 <MenuItem mnemonicParsing="false" onAction="#handleSignOut" text="Sign out"/>
             </items>

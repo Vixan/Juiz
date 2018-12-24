@@ -1,6 +1,5 @@
 package presentation.dashboard;
 
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -26,10 +25,12 @@ public class DashboardController {
     public Label titleQuizCountLabel;
     public MenuButton userButton;
     public Menu difficultySettingMenu;
+    public ToggleGroup difficultyToggleGroup;
     private List<Quiz> quizzes;
     private List<Difficulty> difficulties;
     private ConfigProperties configProperties = ConfigProperties.getInstance();
     private QuizService quizService = new QuizService();
+    private DifficultyService difficultyService = new DifficultyService();
     private User signedInUser;
 
     @FXML
@@ -78,7 +79,6 @@ public class DashboardController {
     }
 
     private void drawDifficulties() {
-        ToggleGroup difficultyToggleGroup = new ToggleGroup();
         List<RadioMenuItem> difficultyOptions = new ArrayList<>();
 
         for (Difficulty difficulty : difficulties) {
@@ -93,8 +93,13 @@ public class DashboardController {
     }
 
     private void getDifficulties() {
-        DifficultyService difficultyService = new DifficultyService();
         difficulties = difficultyService.getAll();
+    }
+
+    private Difficulty getSelectedDifficulty() {
+        String selectedDifficultyName = ((RadioMenuItem)difficultyToggleGroup.getSelectedToggle()).getText();
+
+        return difficultyService.getByName(selectedDifficultyName);
     }
 
     public void setUser(User user) {
@@ -109,7 +114,7 @@ public class DashboardController {
     }
 
     private void handleStartQuiz(Quiz quiz) {
-        System.out.println(quiz.getName());
+        System.out.println(getSelectedDifficulty().getName());
     }
 
     private void showAuthentication() {

@@ -18,6 +18,14 @@ public class DifficultyService implements Service<Difficulty> {
         return difficulty;
     }
 
+    public Difficulty getByName(String difficultyName) {
+        difficultyRepository.openCurrentSession();
+        Difficulty difficulty = difficultyRepository.getByName(difficultyName);
+        difficultyRepository.closeCurrentSession();
+
+        return difficulty;
+    }
+
     @Override
     public List<Difficulty> getAll() {
         difficultyRepository.openCurrentSession();
