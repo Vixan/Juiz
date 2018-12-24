@@ -23,10 +23,6 @@ public class AuthenticationController {
     private ConfigProperties configProperties = ConfigProperties.getInstance();
     private AuthenticationService authenticationService = new AuthenticationService();
 
-    public AuthenticationController() {
-
-    }
-
     public void handleLogin(ActionEvent event) {
         String username = usernameInput.getText().trim();
         String password = passwordInput.getText();
@@ -36,10 +32,8 @@ public class AuthenticationController {
         if (user == null) {
             errorLabel.setVisible(true);
         } else {
-            System.out.println("valid");
             Stage stage = (Stage) loginButton.getScene().getWindow();
             stage.close();
-
             showDashboard();
         }
     }

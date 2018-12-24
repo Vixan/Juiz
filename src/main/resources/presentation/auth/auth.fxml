@@ -9,10 +9,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
 <VBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" styleClass="auth" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.auth.AuthenticationController">
@@ -27,52 +24,37 @@
                 <Insets right="50.0" />
             </HBox.margin>
         </ImageView>
-        <GridPane styleClass="auth__form">
-            <padding>
-                <Insets bottom="20.0" left="10.0" right="10.0" top="20.0" />
-            </padding>
-            <Group>
-                <GridPane.margin>
-                    <Insets bottom="20.0" left="20.0" />
-                </GridPane.margin>
-                <Label alignment="TOP_LEFT" contentDisplay="TOP" styleClass="auth__title" text="Sign in to Juiz" />
-            </Group>
-            <Group GridPane.rowIndex="1">
-                <GridPane.margin>
-                    <Insets bottom="20.0" />
-                </GridPane.margin>
-                <TextField fx:id="usernameInput" layoutY="21.0" prefHeight="48.0" prefWidth="384.0" promptText="Username" styleClass="input" />
-            </Group>
-            <Group GridPane.rowIndex="2">
-                <GridPane.margin>
-                    <Insets bottom="20.0" />
-                </GridPane.margin>
-                <PasswordField fx:id="passwordInput" layoutY="21.0" prefHeight="48.0" prefWidth="384.0" promptText="Password" styleClass="input" />
-            </Group>
-            <Group GridPane.rowIndex="3">
-                <GridPane.margin>
-                    <Insets bottom="20.0" />
-                </GridPane.margin>
-                <Button fx:id="loginButton" defaultButton="true" mnemonicParsing="false" onAction="#handleLogin" prefHeight="48.0" prefWidth="384.0" styleClass="button, button-primary" text="Sign in" />
-            </Group>
-             <Label fx:id="errorLabel" styleClass="auth__error" text="Incorrect username or password." visible="false" GridPane.rowIndex="4">
-            <GridPane.margin>
-               <Insets left="20.0" />
-            </GridPane.margin>
-         </Label>
+      <VBox>
          <HBox.margin>
             <Insets bottom="50.0" top="50.0" />
          </HBox.margin>
-         <columnConstraints>
-            <ColumnConstraints />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-         </rowConstraints>
-        </GridPane>
+         <children>
+               <Group>
+                   <Label alignment="TOP_LEFT" contentDisplay="TOP" styleClass="auth__title" text="Sign in to Juiz" />
+               <VBox.margin>
+                  <Insets bottom="10.0" left="20.0" />
+               </VBox.margin>
+               </Group>
+               <Group>
+                   <TextField fx:id="usernameInput" layoutY="21.0" prefHeight="48.0" prefWidth="384.0" promptText="Username" styleClass="input" />
+               <VBox.margin>
+                  <Insets bottom="10.0" top="10.0" />
+               </VBox.margin>
+               </Group>
+               <Group>
+                   <PasswordField fx:id="passwordInput" layoutY="21.0" prefHeight="48.0" prefWidth="384.0" promptText="Password" styleClass="input" />
+               <VBox.margin>
+                  <Insets bottom="10.0" top="10.0" />
+               </VBox.margin>
+               </Group>
+               <Group>
+                   <Button fx:id="loginButton" defaultButton="true" mnemonicParsing="false" onAction="#handleLogin" prefHeight="48.0" prefWidth="384.0" styleClass="button, button-primary" text="Sign in" />
+               <VBox.margin>
+                  <Insets bottom="30.0" top="10.0" />
+               </VBox.margin>
+               </Group>
+                <Label fx:id="errorLabel" styleClass="auth__error" text="Incorrect username or password." visible="false" />
+         </children>
+      </VBox>
     </HBox>
 </VBox>

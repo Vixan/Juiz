@@ -1,0 +1,64 @@
+.dashboard {
+}
+
+.dashboard__quizzes {
+    -fx-spacing: 20;
+}
+
+.dashboard__quiz {
+    -fx-background-color: -color-secondary;
+    -fx-background-insets: 0;
+    -fx-border-radius: 50 50 50 50;
+    -fx-background-radius: 50 50 50 50;
+    -fx-border-width: 1;
+    -fx-border-color: transparent;
+    -fx-alignment: center-left;
+}
+
+.dashboard__quiz:hover {
+    -fx-cursor: hand;
+    -fx-border-color: derive(-color-ternary, +100%);
+}
+
+.dashboard__quiz__category {
+    -fx-text-fill: -color-light;
+    -fx-background-insets: 0;
+    -fx-border-radius: 50 50 50 50;
+    -fx-background-radius: 50 50 50 50;
+    -fx-padding: 5 20 5 20;
+    -fx-pref-height: 50;
+    -fx-pref-width: 200;
+    -fx-alignment: center;
+}
+
+.category-computer-science {
+    -fx-background-color: #266eff;
+}
+.category-astronomy {
+    -fx-background-color: #a63a82;
+}
+.category-3 {
+    -fx-background-color: #15788c;
+}
+.category-4 {
+    -fx-background-color: #266eff;
+}
+.category-5 {
+    -fx-background-color: #283b73;
+}
+
+.dashboard__quiz__name {
+    -fx-font-size: 18;
+    -fx-padding: 5 20 5 20;
+    -fx-pref-height: 50;
+    -fx-pref-width: 600;
+    -fx-alignment: center-left;
+}
+
+.dashboard__quiz__questions {
+    -fx-text-fill: -color-dark;
+    -fx-font-size: 12;
+    -fx-padding: 5 20 5 20;
+    -fx-pref-width: 120;
+    -fx-alignment: center-left;
+}

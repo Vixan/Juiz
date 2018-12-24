@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.*?>
+<?import java.net.URL?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="presentation.dashboard.DashboardController"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+<VBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0"
+      styleClass="dashboard" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="presentation.dashboard.DashboardController">
+    <HBox alignment="CENTER">
+        <VBox fx:id="quizzesContainer" styleClass="dashboard__quizzes" />
+    </HBox>
+    <stylesheets>
+        <URL value="@../shared/shared.css"/>
+        <URL value="@dashboard.css"/>
+    </stylesheets>
+</VBox>
