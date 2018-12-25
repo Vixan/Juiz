@@ -107,7 +107,14 @@
    -fx-border-color: derive(-color-ternary, +100%);
 }
 
+.progress-bar > .bar {
+    -fx-background-color: -color-primary;
+    -fx-background-insets: 0;
+    -fx-background-radius: 50;
+    -fx-padding: 5;
+}
+
 .progress-bar > .track {
     -fx-text-box-border: transparent;
-    -fx-control-inner-background: -color-secondary;
+    -fx-background-color: -color-secondary;
 }

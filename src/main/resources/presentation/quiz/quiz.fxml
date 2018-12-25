@@ -23,9 +23,10 @@
             <Label text="Time left" />
             <ProgressBar fx:id="timeProgressBar" prefWidth="200.0" progress="0.6" styleClass="quiz__progress">
                 <HBox.margin>
-                    <Insets left="10.0" />
+                    <Insets left="10.0" right="10.0" />
                 </HBox.margin>
             </ProgressBar>
+         <Label fx:id="timeProgressLabel" text="00:00" styleClass="quiz__progress-label" />
         </HBox>
         <VBox.margin>
             <Insets bottom="20.0" top="20.0" />
@@ -40,18 +41,16 @@
                     <CheckBox mnemonicParsing="false" styleClass="quiz__question-checkbox" text="Answer 2" />
                 </VBox>
                 <VBox layoutX="10.0" layoutY="10.0" styleClass="quiz__question">
-                    <children>
-                        <Label styleClass="quiz__question_name" text="Long Question name again" />
-                        <CheckBox mnemonicParsing="false" styleClass="quiz__question-checkbox" text="Answer Long long answer" />
-                        <CheckBox mnemonicParsing="false" styleClass="quiz__question-checkbox" text="Answer 2 shorter" />
-                    </children>
+                    <Label styleClass="quiz__question_name" text="Long Question name again"/>
+                    <CheckBox mnemonicParsing="false" styleClass="quiz__question-checkbox"
+                              text="Answer Long long answer"/>
+                    <CheckBox mnemonicParsing="false" styleClass="quiz__question-checkbox" text="Answer 2 shorter"/>
                 </VBox>
                 <VBox layoutX="10.0" layoutY="125.0" styleClass="quiz__question">
-                    <children>
-                        <Label styleClass="quiz__question_name" text="Question name" />
-                        <CheckBox mnemonicParsing="false" styleClass="quiz__question-checkbox" text="Very very very long answer for a silly question" />
-                        <CheckBox mnemonicParsing="false" styleClass="quiz__question-checkbox" text="Answer 2" />
-                    </children>
+                    <Label styleClass="quiz__question_name" text="Question name"/>
+                    <CheckBox mnemonicParsing="false" styleClass="quiz__question-checkbox"
+                              text="Very very very long answer for a silly question"/>
+                    <CheckBox mnemonicParsing="false" styleClass="quiz__question-checkbox" text="Answer 2"/>
                 </VBox>
             </VBox>
         </ScrollPane>

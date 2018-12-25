@@ -8,6 +8,6 @@ public class Presenter extends Application {
     public void start(Stage rootStage) {
         new InitializationService().initDatabaseConnection();
         Navigator navigator = Navigator.getInstance();
-        navigator.showAuthentication();
+        navigator.showDashboard();
     }
 }

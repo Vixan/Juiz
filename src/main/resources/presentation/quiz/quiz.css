@@ -8,6 +8,8 @@
 }
 
 .quiz__progress {
+    -fx-pref-width: 300;
+    -fx-pref-height: 10;
 }
 
 .quiz__scroll-container {
@@ -28,7 +30,7 @@
 
 .quiz__question_name {
     -fx-font-size: 18;
-    -fx-text-fill: -color-primary;
+    -fx-text-fill: -color-ternary;
     -fx-padding: 0 0 10 0;
 }
 
