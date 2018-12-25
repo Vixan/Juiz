@@ -24,6 +24,9 @@ public class Quiz {
     @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL)
     private Set<Question> questions;
 
+    @Column(name = "quiz_time_limit")
+    private Integer timeLimit;
+
     public Integer getId() {
         return id;
     }
@@ -54,5 +57,13 @@ public class Quiz {
 
     public Set<Question> getQuestions() {
         return questions;
+    }
+
+    public Integer getTimeLimit() {
+        return timeLimit;
+    }
+
+    public void setTimeLimit(Integer timeLimit) {
+        this.timeLimit = timeLimit;
     }
 }
