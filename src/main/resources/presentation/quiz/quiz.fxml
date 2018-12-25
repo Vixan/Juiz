@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" styleClass="quiz" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.quiz.QuizController">
+    <VBox alignment="CENTER" maxWidth="920">
+        <Label styleClass="quiz__title" text="Quiz name">
+            <VBox.margin>
+                <Insets />
+            </VBox.margin>
+        </Label>
+        <HBox alignment="CENTER">
+            <VBox.margin>
+                <Insets bottom="20.0" top="20.0" />
+            </VBox.margin>
+            <Label text="Time left" />
+            <ProgressBar fx:id="timeProgressBar" prefWidth="200.0" progress="0.6" styleClass="quiz__progress">
+                <HBox.margin>
+                    <Insets left="10.0" />
+                </HBox.margin>
+            </ProgressBar>
+        </HBox>
+        <VBox.margin>
+            <Insets bottom="20.0" top="20.0" />
+        </VBox.margin>
+    </VBox>
+    <HBox alignment="CENTER">
+        <ScrollPane hbarPolicy="NEVER" styleClass="quiz__scroll-container">
+            <VBox fx:id="questionsContainer" styleClass="quiz__questions">
+                <VBox styleClass="quiz__question">
+                    <Label styleClass="quiz__question_name" text="Question name" />
+                    <CheckBox mnemonicParsing="false" selected="true" styleClass="quiz__question-checkbox" text="Answer 1" />
+                    <CheckBox mnemonicParsing="false" styleClass="quiz__question-checkbox" text="Answer 2" />
+                </VBox>
+                <VBox layoutX="10.0" layoutY="10.0" styleClass="quiz__question">
+                    <children>
+                        <Label styleClass="quiz__question_name" text="Long Question name again" />
+                        <CheckBox mnemonicParsing="false" styleClass="quiz__question-checkbox" text="Answer Long long answer" />
+                        <CheckBox mnemonicParsing="false" styleClass="quiz__question-checkbox" text="Answer 2 shorter" />
+                    </children>
+                </VBox>
+                <VBox layoutX="10.0" layoutY="125.0" styleClass="quiz__question">
+                    <children>
+                        <Label styleClass="quiz__question_name" text="Question name" />
+                        <CheckBox mnemonicParsing="false" styleClass="quiz__question-checkbox" text="Very very very long answer for a silly question" />
+                        <CheckBox mnemonicParsing="false" styleClass="quiz__question-checkbox" text="Answer 2" />
+                    </children>
+                </VBox>
+            </VBox>
+        </ScrollPane>
+    </HBox>
+    <stylesheets>
+        <URL value="@../shared/shared.css" />
+        <URL value="@quiz.css" />
+    </stylesheets>
+</VBox>

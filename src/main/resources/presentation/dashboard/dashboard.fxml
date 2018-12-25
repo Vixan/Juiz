@@ -9,8 +9,8 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-
 <?import javafx.scene.control.ToggleGroup?>
+
 <VBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0"
       styleClass="dashboard" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="presentation.dashboard.DashboardController">
@@ -44,9 +44,6 @@
         <ScrollPane hbarPolicy="NEVER" styleClass="dashboard__scroll-container">
             <VBox fx:id="quizzesContainer" styleClass="dashboard__quizzes"/>
         </ScrollPane>
-        <VBox.margin>
-            <Insets/>
-        </VBox.margin>
     </HBox>
     <stylesheets>
         <URL value="@../shared/shared.css"/>

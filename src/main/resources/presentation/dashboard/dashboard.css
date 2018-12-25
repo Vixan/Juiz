@@ -50,6 +50,7 @@
 .dashboard__quiz:hover {
     -fx-cursor: hand;
     -fx-border-color: derive(-color-ternary, +100%);
+    -fx-background-color: derive(-color-secondary, +20%);
 }
 
 .dashboard__quiz__category {
@@ -66,17 +67,9 @@
 .category-computer-science {
     -fx-background-color: #266eff;
 }
+
 .category-astronomy {
     -fx-background-color: #a63a82;
-}
-.category-3 {
-    -fx-background-color: #15788c;
-}
-.category-4 {
-    -fx-background-color: #266eff;
-}
-.category-5 {
-    -fx-background-color: #283b73;
 }
 
 .dashboard__quiz__name {
@@ -85,12 +78,11 @@
     -fx-pref-height: 50;
     -fx-pref-width: 600;
     -fx-alignment: center-left;
+    -fx-background-color: transparent;
 }
 
 .dashboard__quiz__questions {
-    -fx-text-fill: -color-dark;
-    -fx-font-size: 12;
+    -fx-background-color: transparent;
     -fx-padding: 5 20 5 20;
-    -fx-pref-width: 120;
     -fx-alignment: center-left;
 }

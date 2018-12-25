@@ -1,0 +1,36 @@
+.quiz {
+    -fx-background-color: -color-light;
+}
+
+.quiz__title {
+    -fx-font-size: 28;
+    -fx-text-fill: -color-ternary;
+}
+
+.quiz__progress {
+}
+
+.quiz__scroll-container {
+    -fx-hbar-policy: never;
+    -fx-vbar-policy: never;
+    -fx-background-color: -color-light;
+    -fx-border-color: transparent;
+}
+
+.quiz__questions {
+    -fx-spacing: 20;
+    -fx-background-color: -color-light;
+}
+
+.quiz__question {
+    -fx-spacing: 10;
+}
+
+.quiz__question_name {
+    -fx-font-size: 18;
+    -fx-text-fill: -color-primary;
+    -fx-padding: 0 0 10 0;
+}
+
+.quiz__question-checkbox {
+}
