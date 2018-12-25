@@ -1,22 +1,17 @@
 package presentation.dashboard;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 import logic.services.DifficultyService;
 import logic.services.QuizService;
+import presentation.Navigator;
 import shared.domain.Difficulty;
 import shared.domain.Quiz;
 import shared.domain.User;
-import shared.utils.ConfigProperties;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +23,6 @@ public class DashboardController {
     public ToggleGroup difficultyToggleGroup;
     private List<Quiz> quizzes;
     private List<Difficulty> difficulties;
-    private ConfigProperties configProperties = ConfigProperties.getInstance();
     private QuizService quizService = new QuizService();
     private DifficultyService difficultyService = new DifficultyService();
     private User signedInUser;
@@ -97,7 +91,7 @@ public class DashboardController {
     }
 
     private Difficulty getSelectedDifficulty() {
-        String selectedDifficultyName = ((RadioMenuItem)difficultyToggleGroup.getSelectedToggle()).getText();
+        String selectedDifficultyName = ((RadioMenuItem) difficultyToggleGroup.getSelectedToggle()).getText();
 
         return difficultyService.getByName(selectedDifficultyName);
     }
@@ -108,37 +102,10 @@ public class DashboardController {
     }
 
     public void handleSignOut() {
-        Stage stage = (Stage) userButton.getScene().getWindow();
-        stage.close();
-        showAuthentication();
+        Navigator.getInstance().showAuthentication();
     }
 
     private void handleStartQuiz(Quiz quiz) {
-        System.out.println(getSelectedDifficulty().getName());
-    }
-
-    private void showAuthentication() {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("/presentation/auth/auth.fxml"));
-            Scene scene = new Scene(fxmlLoader.load());
-            int windowWidth = 800;
-            int windowHeight = 600;
-
-            if (configProperties != null) {
-                windowWidth = configProperties.getWindowWidth();
-                windowHeight = configProperties.getWindowHeight();
-            }
-
-            Stage stage = new Stage();
-            stage.setTitle("Juiz Authentication");
-            stage.setScene(scene);
-            stage.setMinHeight(windowHeight);
-            stage.setMinWidth(windowWidth);
-            stage.getIcons().add(new Image("/presentation/assets/juiz.icon.png"));
-            stage.show();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+        Navigator.getInstance().showQuiz(quiz, getSelectedDifficulty());
     }
 }
