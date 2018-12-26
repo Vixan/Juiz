@@ -1,11 +1,7 @@
 package presentation.quiz;
 
 import javafx.application.Platform;
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
+import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import presentation.Navigator;
 import shared.domain.Answer;
@@ -14,9 +10,8 @@ import shared.domain.Question;
 import shared.domain.Quiz;
 import shared.domain.User;
 
-import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class QuizController {
     public ProgressBar timeProgressBar;
@@ -28,8 +23,9 @@ public class QuizController {
     private Quiz startedQuiz;
     private Difficulty selectedDifficulty;
     private User signedInUser;
-    private List<CheckBox> answerCheckboxes;
+    private List<CheckBox> answerCheckboxes = new ArrayList<>();
     private Timer timer = new Timer();
+    private List<String> correctAnswers = new ArrayList<>();
 
     public void startQuiz(Quiz quiz, Difficulty difficulty, User user) {
         selectedDifficulty = difficulty;
@@ -57,10 +53,14 @@ public class QuizController {
 
             questionContainer.getChildren().add(questionNameLabel);
             for (Answer answer : question.getAnswers()) {
-                CheckBox answerCheckBox = new CheckBox(answer.getName());
-                answerCheckBox.getStyleClass().add("quiz__question-checkbox");
-                answerCheckBox.setSelected(false);
-                questionContainer.getChildren().add(answerCheckBox);
+                CheckBox answerCheckbox = new CheckBox(answer.getName());
+                answerCheckbox.getStyleClass().add("quiz__question-checkbox");
+                answerCheckbox.setSelected(false);
+                questionContainer.getChildren().add(answerCheckbox);
+                answerCheckboxes.add(answerCheckbox);
+                if (answer.isCorrect()) {
+                    correctAnswers.add(answer.getName());
+                }
             }
 
             questionsContainer.getChildren().add(questionContainer);
@@ -92,5 +92,28 @@ public class QuizController {
     public void cancelQuiz() {
         timer.cancel();
         Navigator.getInstance().showDashboard();
+    }
+
+    public void evaluateGivenAnswers() {
+        List<CheckBox> selectedCheckboxes = answerCheckboxes.stream()
+                .filter(CheckBox::isSelected).collect(Collectors.toList());
+        List<String> givenAnswers = selectedCheckboxes.stream().map(Labeled::getText).collect(Collectors.toList());
+
+        Map<Question, Boolean> validatedQuestions = new HashMap<>();
+        for (Question question : startedQuiz.getQuestions()) {
+            boolean isCorrect = true;
+
+            for (Answer answer : question.getAnswers()) {
+                if (!answer.isCorrect() && givenAnswers.contains(answer.getName()) ||
+                        (answer.isCorrect() && !givenAnswers.contains(answer.getName()))) {
+                    isCorrect = false;
+                    break;
+                }
+            }
+
+            validatedQuestions.put(question, isCorrect);
+        }
+
+        System.out.println(validatedQuestions.toString());
     }
 }

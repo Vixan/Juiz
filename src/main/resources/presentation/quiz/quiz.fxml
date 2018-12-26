@@ -63,7 +63,7 @@
                     <!--</VBox>-->
                 </VBox>
                 <HBox alignment="CENTER_LEFT">
-                    <Button fx:id="evaluateButton" mnemonicParsing="false" prefWidth="384" styleClass="button, button-primary, quiz__evaluate" text="Evaluate given answers" />
+                    <Button fx:id="evaluateButton" mnemonicParsing="false" onAction="#evaluateGivenAnswers" prefWidth="384" styleClass="button, button-primary, quiz__evaluate" text="Evaluate given answers" />
                 </HBox>
             </VBox>
         </ScrollPane>
