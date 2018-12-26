@@ -4,9 +4,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+
 import presentation.quiz.QuizController;
 import shared.domain.Difficulty;
 import shared.domain.Quiz;
+import shared.domain.User;
 import shared.utils.ConfigProperties;
 
 import java.io.IOException;
@@ -75,15 +77,14 @@ public class Navigator {
         }
     }
 
-    public void showQuiz(Quiz quiz, Difficulty difficulty) {
+    public void showQuiz(Quiz quiz, Difficulty difficulty, User user) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(getClass().getResource(QUIZ_VIEW_PATH));
             Scene scene = new Scene(fxmlLoader.load());
 
             QuizController quizController = fxmlLoader.getController();
-            quizController.setQuiz(quiz);
-            quizController.setDifficulty(difficulty);
+            quizController.startQuiz(quiz, difficulty, user);
 
             instance.rootStage.setTitle("Juiz Quiz");
             instance.rootStage.setScene(scene);

@@ -106,6 +106,6 @@ public class DashboardController {
     }
 
     private void handleStartQuiz(Quiz quiz) {
-        Navigator.getInstance().showQuiz(quiz, getSelectedDifficulty());
+        Navigator.getInstance().showQuiz(quiz, getSelectedDifficulty(), signedInUser);
     }
 }
