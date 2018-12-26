@@ -48,7 +48,7 @@
 
 .button.button-secondary {
     -fx-background-color: -color-secondary;
-    -fx-text-fill: -color-light;
+    -fx-text-fill: -color-dark;
 }
 
 .button.button-secondary:hover {

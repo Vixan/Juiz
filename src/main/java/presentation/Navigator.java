@@ -92,4 +92,8 @@ public class Navigator {
             ex.printStackTrace();
         }
     }
+
+    public Stage getRootStage() {
+        return rootStage;
+    }
 }

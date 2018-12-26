@@ -8,7 +8,6 @@
 }
 
 .quiz__progress {
-    -fx-pref-width: 300;
     -fx-pref-height: 10;
 }
 
@@ -17,6 +16,12 @@
     -fx-vbar-policy: never;
     -fx-background-color: -color-light;
     -fx-border-color: transparent;
+}
+
+.quiz__content {
+    -fx-spacing: 50;
+    -fx-background-color: -color-light;
+    -fx-padding: 0 0 20 0;
 }
 
 .quiz__questions {
@@ -35,4 +40,15 @@
 }
 
 .quiz__question-checkbox {
+    -fx-pref-width: 920;
+    -fx-min-height: 48;
+    -fx-wrap-text: true;
+}
+
+.quiz__evaluate {
+    -fx-pref-height: 48;
+}
+
+.quiz__cancel {
+    -fx-font-size: 12;
 }

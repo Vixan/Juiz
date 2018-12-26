@@ -88,9 +88,9 @@ public class HbnPersistenceContext {
         quizRepository.openCurrentSessionWithTransaction();
 
         String[][] initialQuizData = new String[][]{
-                {"Pointers in C", "A quiz to review the usage of pointers in C.", "0"},
-                {"Algorithms & Structures", "Algorithms are important, so you have a test on them.", "0"},
-                {"Supernovas", "Test your knowledge about some of the impressive cosmic objects.", "1"}};
+                {"Pointers in C", "A quiz to review the usage of pointers in C.", "0", "30"},
+                {"Algorithms & Structures", "Algorithms are important, so you have a test on them.", "0", "120"},
+                {"Supernovas", "Test your knowledge about some of the impressive cosmic objects.", "1", "360"}};
         ArrayList<Quiz> initialQuizzes = new ArrayList<Quiz>();
 
         for (String[] quizData : initialQuizData) {
@@ -98,6 +98,7 @@ public class HbnPersistenceContext {
             quiz.setName(quizData[0]);
             quiz.setDescription(quizData[1]);
             quiz.setCategory(initialCategories.get(Integer.parseInt(quizData[2])));
+            quiz.setTimeLimit(Integer.parseInt(quizData[3]));
             initialQuizzes.add(quiz);
             quizRepository.add(quiz);
         }
