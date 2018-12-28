@@ -18,13 +18,12 @@ public class AuthenticationController {
     public void handleLogin() {
         String username = usernameInput.getText().trim();
         String password = passwordInput.getText();
-        errorLabel.setVisible(false);
 
         User user = authenticationService.login(username, password);
         if (user == null) {
             errorLabel.setVisible(true);
         } else {
-            Navigator.getInstance().showDashboard();
+            Navigator.getInstance().showDashboard(user);
         }
     }
 }

@@ -1,6 +1,5 @@
 package presentation.dashboard;
 
-import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
@@ -25,21 +24,17 @@ public class DashboardController {
     private List<Difficulty> difficulties;
     private QuizService quizService = new QuizService();
     private DifficultyService difficultyService = new DifficultyService();
-    private User signedInUser;
+    private User currentUser;
 
-    @FXML
-    public void initialize() {
-        initDifficulties();
-        initQuizzes();
-    }
+    public void init(User user) {
+        currentUser = user;
 
-    private void initQuizzes() {
-        getQuizzes();
+        userButton.setText(currentUser.getName());
+        quizzes = quizService.getAll();
+        difficulties = difficultyService.getAll();
+
+        drawDifficulties();
         drawQuizzes();
-    }
-
-    private void getQuizzes() {
-        this.quizzes = quizService.getAll();
     }
 
     private void drawQuizzes() {
@@ -67,11 +62,6 @@ public class DashboardController {
         }
     }
 
-    private void initDifficulties() {
-        getDifficulties();
-        drawDifficulties();
-    }
-
     private void drawDifficulties() {
         List<RadioMenuItem> difficultyOptions = new ArrayList<>();
 
@@ -86,19 +76,10 @@ public class DashboardController {
         difficultySettingMenu.getItems().addAll(difficultyOptions);
     }
 
-    private void getDifficulties() {
-        difficulties = difficultyService.getAll();
-    }
-
     private Difficulty getSelectedDifficulty() {
         String selectedDifficultyName = ((RadioMenuItem) difficultyToggleGroup.getSelectedToggle()).getText();
 
         return difficultyService.getByName(selectedDifficultyName);
-    }
-
-    public void setUser(User user) {
-        userButton.setText(user.getName());
-        signedInUser = user;
     }
 
     public void handleSignOut() {
@@ -106,6 +87,6 @@ public class DashboardController {
     }
 
     private void handleStartQuiz(Quiz quiz) {
-        Navigator.getInstance().showQuiz(quiz, getSelectedDifficulty(), signedInUser);
+        Navigator.getInstance().showQuiz(quiz, getSelectedDifficulty(), currentUser);
     }
 }

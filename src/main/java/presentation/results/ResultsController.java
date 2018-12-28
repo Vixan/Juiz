@@ -54,13 +54,14 @@ public class ResultsController {
 
     private void drawResults() {
         quizTitleLabel.setText(currentQuiz.getName());
-        int correctQuestionsCount = validatedQuestions.values().stream().filter(validation -> validation).toArray().length;
+        int correctQuestionsCount = validatedQuestions.values().stream()
+                .filter(validation -> validation).toArray().length;
         scoreLabel.setText("Your score is " + correctQuestionsCount + " points");
 
         drawValidatedQuestions();
     }
 
     public void returnToQuizzes() {
-        Navigator.getInstance().showDashboard();
+        Navigator.getInstance().showDashboard(currentUser);
     }
 }

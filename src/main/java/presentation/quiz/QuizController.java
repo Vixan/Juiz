@@ -27,7 +27,6 @@ public class QuizController {
     private Difficulty selectedDifficulty;
     private User currentUser;
     private List<CheckBox> answerCheckboxes = new ArrayList<>();
-    private List<String> correctAnswers = new ArrayList<>();
     private ScheduledExecutorService timer;
 
     public void init(Quiz quiz, Difficulty difficulty, User user) {
@@ -61,9 +60,6 @@ public class QuizController {
                 answerCheckbox.setSelected(false);
                 questionContainer.getChildren().add(answerCheckbox);
                 answerCheckboxes.add(answerCheckbox);
-                if (answer.isCorrect()) {
-                    correctAnswers.add(answer.getName());
-                }
             }
 
             questionsContainer.getChildren().add(questionContainer);
@@ -98,7 +94,7 @@ public class QuizController {
 
     public void cancelQuiz() {
         timer.shutdown();
-        Navigator.getInstance().showDashboard();
+        Navigator.getInstance().showDashboard(currentUser);
     }
 
     public void evaluateGivenAnswers() {

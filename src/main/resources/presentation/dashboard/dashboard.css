@@ -72,6 +72,14 @@
     -fx-background-color: #a63a82;
 }
 
+.category-music {
+    -fx-background-color: #00d5ff;
+}
+
+.category-art {
+    -fx-background-color: #f37c55;
+}
+
 .dashboard__quiz__name {
     -fx-font-size: 18;
     -fx-padding: 5 20 5 20;

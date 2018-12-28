@@ -5,6 +5,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
+import presentation.dashboard.DashboardController;
 import presentation.quiz.QuizController;
 import presentation.results.ResultsController;
 import shared.domain.*;
@@ -65,11 +66,14 @@ public class Navigator {
         }
     }
 
-    public void showDashboard() {
+    public void showDashboard(User user) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(instance.getClass().getResource(DASHBOARD_VIEW_PATH));
             Scene scene = new Scene(fxmlLoader.load());
+
+            DashboardController dashboardController = fxmlLoader.getController();
+            dashboardController.init(user);
 
             instance.rootStage.setTitle("Juiz Dashboard");
             instance.rootStage.setScene(scene);
