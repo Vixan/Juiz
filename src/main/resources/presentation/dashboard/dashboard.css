@@ -16,7 +16,7 @@
     -fx-text-fill: -color-ternary;
 }
 
-.dashboard__title_quiz-count {
+.dashboard__title__quiz-count {
     -fx-font-size: 12;
     -fx-text-fill: -color-light;
     -fx-background-color: -color-primary;
@@ -30,6 +30,19 @@
     -fx-vbar-policy: never;
     -fx-background-color: -color-light;
     -fx-border-color: transparent;
+}
+
+.dashboard__display-options {
+    -fx-background-color: -color-light;
+}
+
+.dashboard__display-label {
+    -fx-font-size: 12;
+}
+
+.dashboard__options {
+    -fx-font-size: 12;
+    -fx-min-width: 64;
 }
 
 .dashboard__quizzes {

@@ -12,7 +12,10 @@ import shared.domain.Quiz;
 import shared.domain.User;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class DashboardController {
     public VBox quizzesContainer;
@@ -20,6 +23,8 @@ public class DashboardController {
     public MenuButton userButton;
     public Menu difficultySettingMenu;
     public ToggleGroup difficultyToggleGroup;
+    public ChoiceBox<String> sortButton;
+    public ChoiceBox<String> filterButton;
     private List<Quiz> quizzes;
     private List<Difficulty> difficulties;
     private QuizService quizService = new QuizService();
@@ -34,13 +39,36 @@ public class DashboardController {
         difficulties = difficultyService.getAll();
 
         drawDifficulties();
-        drawQuizzes();
+        drawQuizzes(getSortedQuizzesByCategory());
+        drawCategoriesFilter();
+
+        sortButton.getSelectionModel().selectedItemProperty()
+                .addListener((observable, oldValue, newValue) -> handleChangeOrder(newValue));
+        filterButton.getSelectionModel().selectedItemProperty()
+                .addListener((observable, oldValue, newValue) -> handleChangeFilter(newValue));
     }
 
-    private void drawQuizzes() {
-        titleQuizCountLabel.setText(quizzes.size() + " available");
+    private void handleChangeOrder(String orderByProperty) {
+        if (orderByProperty.equals("Category")) {
+            drawQuizzes(getSortedQuizzesByCategory());
+        } else {
+            drawQuizzes(getSortedQuizzesByName());
+        }
+    }
 
-        for (Quiz quiz : quizzes) {
+    private void handleChangeFilter(String filterByCategory) {
+        if (filterByCategory.equals("All")) {
+            drawQuizzes(quizzes);
+        } else {
+            drawQuizzes(getFilteredQuizzesByCategory(filterByCategory));
+        }
+    }
+
+    private void drawQuizzes(List<Quiz> sortedQuizzes) {
+        titleQuizCountLabel.setText(sortedQuizzes.size() + " available");
+        quizzesContainer.getChildren().clear();
+
+        for (Quiz quiz : sortedQuizzes) {
             HBox quizContainer = new HBox();
             quizContainer.getStyleClass().add("dashboard__quiz");
 
@@ -62,6 +90,26 @@ public class DashboardController {
         }
     }
 
+    private List<Quiz> getSortedQuizzesByCategory() {
+        List<Quiz> sortedQuizzes = quizzes;
+        sortedQuizzes.sort(Comparator.comparing((Quiz quiz) -> quiz.getCategory().getId()));
+
+        return sortedQuizzes;
+    }
+
+    private List<Quiz> getSortedQuizzesByName() {
+        List<Quiz> sortedQuizzes = quizzes;
+        sortedQuizzes.sort(Comparator.comparing(Quiz::getName));
+
+        return sortedQuizzes;
+    }
+
+    private List<Quiz> getFilteredQuizzesByCategory(String categoryName) {
+        return quizzes.stream()
+                .filter(quiz -> quiz.getCategory().getName().equals(categoryName))
+                .collect(Collectors.toList());
+    }
+
     private void drawDifficulties() {
         List<RadioMenuItem> difficultyOptions = new ArrayList<>();
 
@@ -80,6 +128,15 @@ public class DashboardController {
         String selectedDifficultyName = ((RadioMenuItem) difficultyToggleGroup.getSelectedToggle()).getText();
 
         return difficultyService.getByName(selectedDifficultyName);
+    }
+
+    private void drawCategoriesFilter() {
+        Set<String> categoryNames = quizzes.stream()
+                .map(quiz -> quiz.getCategory().getName())
+                .collect(Collectors.toSet());
+
+        filterButton.getItems().add("All");
+        filterButton.getItems().addAll(categoryNames);
     }
 
     public void handleSignOut() {
