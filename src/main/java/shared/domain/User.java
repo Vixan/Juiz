@@ -1,12 +1,11 @@
 package shared.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Column;
-import javax.persistence.Table;
+import javax.persistence.*;
 
+/**
+ * The user model and database {@link Entity}.<br/>
+ * Only the authenticated user has access to the database quizzes.
+ */
 @Entity
 @Table(name = "user")
 public class User {

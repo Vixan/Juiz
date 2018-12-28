@@ -1,12 +1,20 @@
 package persistence.hibernate;
 
 import org.mindrot.jbcrypt.BCrypt;
+import persistence.abstractions.PersistenceContext;
 import shared.domain.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class HbnPersistenceContext {
+
+/**
+ * The Hibernate implementation of the Persistence Context.
+ * <p><a href="http://hibernate.org/orm/">Hibernate ORM</a></p>
+ *
+ * @see PersistenceContext
+ */
+public class HbnPersistenceContext implements PersistenceContext {
     private HbnCategoryRepository categoryRepository = new HbnCategoryRepository();
     private HbnUserRepository userRepository = new HbnUserRepository();
     private HbnDifficultyRepository difficultyRepository = new HbnDifficultyRepository();
@@ -14,7 +22,10 @@ public class HbnPersistenceContext {
     private HbnQuestionRepository questionRepository = new HbnQuestionRepository();
     private HbnAnswerRepository answerRepository = new HbnAnswerRepository();
 
-    public void initializeData() {
+    /**
+     * Fill the database with initial data.
+     */
+    public void initialize() {
         quizRepository.openCurrentSession();
 
         if (quizRepository.getAll().size() == 0) {
@@ -29,6 +40,11 @@ public class HbnPersistenceContext {
         quizRepository.closeCurrentSession();
     }
 
+    /**
+     * Create a list of initial users and write them to the database.
+     *
+     * @return the list of initial users.
+     */
     private ArrayList<User> loadInitialUsers() {
         userRepository.openCurrentSessionWithTransaction();
 
@@ -62,6 +78,11 @@ public class HbnPersistenceContext {
         return initialUsers;
     }
 
+    /**
+     * Create a list of initial quiz categories and write them to the database.
+     *
+     * @return the list of initial quiz categories.
+     */
     private ArrayList<Category> loadInitialCategories() {
         categoryRepository.openCurrentSessionWithTransaction();
 
@@ -87,6 +108,11 @@ public class HbnPersistenceContext {
         return initialCategories;
     }
 
+    /**
+     * Create a list of initial quiz difficulty levels and write them to the database.
+     *
+     * @return the list of initial quiz difficulties.
+     */
     private ArrayList<Difficulty> loadInitialDifficulties() {
         difficultyRepository.openCurrentSessionWithTransaction();
 
@@ -119,6 +145,12 @@ public class HbnPersistenceContext {
         return initialDifficulties;
     }
 
+    /**
+     * Create a list of initial quizzes and write them to the database.
+     *
+     * @param initialCategories categories that the initial quizzes are part of.
+     * @return the list of initial quizzes.
+     */
     private ArrayList<Quiz> loadInitialQuizzes(List<Category> initialCategories) {
         quizRepository.openCurrentSessionWithTransaction();
 
@@ -176,6 +208,12 @@ public class HbnPersistenceContext {
         return initialQuizzes;
     }
 
+    /**
+     * Create a list of initial quiz questions and write them to the database.
+     *
+     * @param initialQuizzes quizzes that the initial questions are part of.
+     * @return the list of initial questions.
+     */
     private ArrayList<Question> loadInitialQuestions(List<Quiz> initialQuizzes) {
         questionRepository.openCurrentSessionWithTransaction();
 
@@ -226,6 +264,12 @@ public class HbnPersistenceContext {
         return initialQuestions;
     }
 
+    /**
+     * Create a list of initial answers and write them to the database.
+     *
+     * @param initialQuestions questions that the initial answers are part of.
+     * @return the list of initial answers.
+     */
     private ArrayList<Answer> loadInitialAnswers(List<Question> initialQuestions) {
         answerRepository.openCurrentSessionWithTransaction();
 

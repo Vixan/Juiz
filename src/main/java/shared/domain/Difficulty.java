@@ -1,12 +1,14 @@
 package shared.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Column;
-import javax.persistence.Table;
+import javax.persistence.*;
 
+/**
+ * The difficulty level model and database {@link Entity}.<br/>
+ * Each {@link Quiz} can be taken in different levels of difficulty,
+ * which can influence the outcome.
+ * <br/><br/>
+ * For example: each difficulty level has a time modifier.
+ */
 @Entity
 @Table(name = "difficulty")
 public class Difficulty {

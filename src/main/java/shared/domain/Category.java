@@ -1,15 +1,13 @@
 package shared.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Column;
-import javax.persistence.Table;
-import javax.persistence.OneToMany;
-import javax.persistence.CascadeType;
+import javax.persistence.*;
 import java.util.Set;
 
+/**
+ * The category model and database {@link Entity}.<br/>
+ * Quizzes are divided in categories and can be certain school subjects like "Astronomy".
+ * @see Quiz
+ */
 @Entity
 @Table(name = "category")
 public class Category {

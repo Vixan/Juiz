@@ -3,6 +3,12 @@ package shared.domain;
 import javax.persistence.*;
 import java.util.Set;
 
+/**
+ * The {@link Quiz} question model and database {@link Entity}.<br/>
+ * A question is comprised of answers.
+ *
+ * @see Answer
+ */
 @Entity
 @Table(name = "question")
 public class Question {

@@ -9,6 +9,10 @@ import javax.persistence.Table;
 import javax.persistence.ManyToOne;
 import javax.persistence.JoinColumn;
 
+/**
+ * The {@link Question} answer model and database {@link Entity}.<br/>
+ * An answer can be correct for a question or not.
+ */
 @Entity
 @Table(name = "answer")
 public class Answer {

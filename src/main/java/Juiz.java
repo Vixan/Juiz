@@ -14,6 +14,6 @@ public class Juiz {
 
     private static void loadPersistence() {
         HbnPersistenceContext persistenceContext = new HbnPersistenceContext();
-        persistenceContext.initializeData();
+        persistenceContext.initialize();
     }
 }

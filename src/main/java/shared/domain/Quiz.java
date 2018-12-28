@@ -3,6 +3,13 @@ package shared.domain;
 import javax.persistence.*;
 import java.util.Set;
 
+/**
+ * The quiz model and database {@link Entity}.<br/>
+ * A quiz can be taken in a certain time limit and is comprised of questions.
+ * Each quiz is part of a {@link Category}.
+ *
+ * @see Question
+ */
 @Entity
 @Table(name = "quiz")
 public class Quiz {
