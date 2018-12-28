@@ -6,18 +6,19 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import presentation.quiz.QuizController;
-import shared.domain.Difficulty;
-import shared.domain.Quiz;
-import shared.domain.User;
+import presentation.results.ResultsController;
+import shared.domain.*;
 import shared.utils.ConfigProperties;
 
 import java.io.IOException;
+import java.util.Map;
 
 public class Navigator {
     private static final String ICON_PATH = "/presentation/assets/juiz.icon.png";
     private static final String AUTHENTICATION_VIEW_PATH = "/presentation/auth/auth.fxml";
     private static final String DASHBOARD_VIEW_PATH = "/presentation/dashboard/dashboard.fxml";
     private static final String QUIZ_VIEW_PATH = "/presentation/quiz/quiz.fxml";
+    private static final String RESULTS_VIEW_PATH = "/presentation/results/results.fxml";
 
     private ConfigProperties configProperties = ConfigProperties.getInstance();
     private static Navigator instance = null;
@@ -84,9 +85,25 @@ public class Navigator {
             Scene scene = new Scene(fxmlLoader.load());
 
             QuizController quizController = fxmlLoader.getController();
-            quizController.startQuiz(quiz, difficulty, user);
+            quizController.init(quiz, difficulty, user);
 
             instance.rootStage.setTitle("Juiz Quiz");
+            instance.rootStage.setScene(scene);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void showResults(Quiz quiz, User user, Map<Question, Boolean> results) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource(RESULTS_VIEW_PATH));
+            Scene scene = new Scene(fxmlLoader.load());
+
+            ResultsController resultsController = fxmlLoader.getController();
+            resultsController.init(quiz, user, results);
+
+            instance.rootStage.setTitle("Juiz Quiz Results");
             instance.rootStage.setScene(scene);
         } catch (IOException ex) {
             ex.printStackTrace();

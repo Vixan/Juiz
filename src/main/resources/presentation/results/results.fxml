@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0"
+      styleClass="results" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="presentation.results.ResultsController">
+    <VBox alignment="CENTER" maxWidth="920.0">
+        <Label fx:id="quizTitleLabel" styleClass="results__quiz-title" text="Quiz name">
+            <VBox.margin>
+                <Insets bottom="20.0"/>
+            </VBox.margin>
+        </Label>
+        <HBox alignment="CENTER">
+            <Label fx:id="scoreLabel" styleClass="results__score" text="Your score is 35 points"/>
+            <HBox alignment="CENTER" HBox.hgrow="ALWAYS">
+                <Label text="Below are your results for each question"/>
+            </HBox>
+            <Button fx:id="returnButton" onAction="#returnToQuizzes" styleClass="button, button-secondary"
+                    text="Return to quizzes"/>
+        </HBox>
+        <VBox.margin>
+            <Insets bottom="20.0"/>
+        </VBox.margin>
+    </VBox>
+    <HBox alignment="CENTER">
+        <ScrollPane hbarPolicy="NEVER" styleClass="results__scroll-container">
+            <VBox fx:id="validatedQuestionsContainer" alignment="CENTER_LEFT" styleClass="results__questions-container"
+                  HBox.hgrow="ALWAYS"/>
+        </ScrollPane>
+    </HBox>
+    <stylesheets>
+        <URL value="@../shared/shared.css"/>
+        <URL value="@results.css"/>
+    </stylesheets>
+</VBox>

@@ -11,6 +11,9 @@ import shared.domain.Quiz;
 import shared.domain.User;
 
 import java.util.*;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 public class QuizController {
@@ -20,32 +23,32 @@ public class QuizController {
     public Button evaluateButton;
     public Button cancelButton;
     public Label titleLabel;
-    private Quiz startedQuiz;
+    private Quiz currentQuiz;
     private Difficulty selectedDifficulty;
-    private User signedInUser;
+    private User currentUser;
     private List<CheckBox> answerCheckboxes = new ArrayList<>();
-    private Timer timer = new Timer();
     private List<String> correctAnswers = new ArrayList<>();
+    private ScheduledExecutorService timer;
 
-    public void startQuiz(Quiz quiz, Difficulty difficulty, User user) {
+    public void init(Quiz quiz, Difficulty difficulty, User user) {
         selectedDifficulty = difficulty;
-        startedQuiz = quiz;
-        startedQuiz.setTimeLimit((int) (startedQuiz.getTimeLimit() / selectedDifficulty.getModifier()));
-        signedInUser = user;
+        currentUser = user;
+        currentQuiz = quiz;
+        currentQuiz.setTimeLimit((int) (currentQuiz.getTimeLimit() / selectedDifficulty.getModifier()));
 
         drawQuiz();
     }
 
     private void drawQuiz() {
-        titleLabel.setText(startedQuiz.getName());
+        titleLabel.setText(currentQuiz.getName());
         drawQuestions();
 
         redrawProgress();
-        Navigator.getInstance().getRootStage().setOnCloseRequest(event -> timer.cancel());
+        Navigator.getInstance().getRootStage().setOnCloseRequest(event -> timer.shutdown());
     }
 
     private void drawQuestions() {
-        for (Question question : startedQuiz.getQuestions()) {
+        for (Question question : currentQuiz.getQuestions()) {
             VBox questionContainer = new VBox();
             questionContainer.getStyleClass().add("quiz__question");
             Label questionNameLabel = new Label(question.getName());
@@ -68,8 +71,8 @@ public class QuizController {
     }
 
     private void redrawProgress() {
-        timer.scheduleAtFixedRate(new TimerTask() {
-            int quizTimeLimit = startedQuiz.getTimeLimit();
+        TimerTask timerScheduledTask = new TimerTask() {
+            int quizTimeLimit = currentQuiz.getTimeLimit();
 
             @Override
             public void run() {
@@ -78,19 +81,23 @@ public class QuizController {
                         int minutes = quizTimeLimit / 60;
                         int seconds = quizTimeLimit % 60;
                         timeProgressLabel.setText(String.format("%d:%02d", minutes, seconds));
-                        double progress = (quizTimeLimit * 1.0) / startedQuiz.getTimeLimit();
+                        double progress = (quizTimeLimit * 1.0) / currentQuiz.getTimeLimit();
                         timeProgressBar.setProgress(progress);
                         quizTimeLimit--;
                     });
                 } else {
-                    timer.cancel();
+                    answerCheckboxes.forEach(checkBox -> checkBox.setDisable(true));
+                    evaluateGivenAnswers();
                 }
             }
-        }, 0, 1000);
+        };
+
+        timer = Executors.newSingleThreadScheduledExecutor();
+        timer.scheduleAtFixedRate(timerScheduledTask, 0, 1000, TimeUnit.MILLISECONDS);
     }
 
     public void cancelQuiz() {
-        timer.cancel();
+        timer.shutdown();
         Navigator.getInstance().showDashboard();
     }
 
@@ -100,7 +107,7 @@ public class QuizController {
         List<String> givenAnswers = selectedCheckboxes.stream().map(Labeled::getText).collect(Collectors.toList());
 
         Map<Question, Boolean> validatedQuestions = new HashMap<>();
-        for (Question question : startedQuiz.getQuestions()) {
+        for (Question question : currentQuiz.getQuestions()) {
             boolean isCorrect = true;
 
             for (Answer answer : question.getAnswers()) {
@@ -114,6 +121,7 @@ public class QuizController {
             validatedQuestions.put(question, isCorrect);
         }
 
-        System.out.println(validatedQuestions.toString());
+        timer.shutdown();
+        Navigator.getInstance().showResults(currentQuiz, currentUser, validatedQuestions);
     }
 }

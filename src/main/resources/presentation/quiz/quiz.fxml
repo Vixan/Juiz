@@ -29,7 +29,7 @@
                 <HBox.margin>
                     <Insets left="20.0" right="20.0" />
                 </HBox.margin>
-                <ProgressBar fx:id="timeProgressBar" maxWidth="1.7976931348623157E308" progress="0.6" styleClass="quiz__progress" HBox.hgrow="ALWAYS" />
+                <ProgressBar fx:id="timeProgressBar" maxWidth="1.7976931348623157E308" progress="1.0" styleClass="quiz__progress" HBox.hgrow="ALWAYS" />
             </HBox>
             <Label fx:id="timeProgressLabel" styleClass="quiz__progress-label" text="00:00">
                 <HBox.margin>
@@ -45,25 +45,9 @@
     <HBox alignment="CENTER">
         <ScrollPane hbarPolicy="NEVER" styleClass="quiz__scroll-container">
             <VBox alignment="CENTER_LEFT" spacing="20" styleClass="quiz__content">
-                <VBox fx:id="questionsContainer" styleClass="quiz__questions" HBox.hgrow="ALWAYS">
-                    <!--<VBox styleClass="quiz__question">-->
-                        <!--<Label styleClass="quiz__question_name" text="Question name" />-->
-                        <!--<CheckBox mnemonicParsing="false" selected="true" styleClass="quiz__question-checkbox" text="Answer 1" />-->
-                        <!--<CheckBox mnemonicParsing="false" styleClass="quiz__question-checkbox" text="Answer 2" />-->
-                    <!--</VBox>-->
-                    <!--<VBox layoutX="10.0" layoutY="10.0" styleClass="quiz__question">-->
-                        <!--<Label styleClass="quiz__question_name" text="Long Question name again" />-->
-                        <!--<CheckBox mnemonicParsing="false" styleClass="quiz__question-checkbox" text="Answer Long long answer" />-->
-                        <!--<CheckBox mnemonicParsing="false" styleClass="quiz__question-checkbox" text="Answer 2 shorter" />-->
-                    <!--</VBox>-->
-                    <!--<VBox layoutX="10.0" layoutY="125.0" styleClass="quiz__question">-->
-                        <!--<Label styleClass="quiz__question_name" text="Question name" />-->
-                        <!--<CheckBox mnemonicParsing="false" styleClass="quiz__question-checkbox" text="Very very very long answer for a silly question number 3" />-->
-                        <!--<CheckBox mnemonicParsing="false" styleClass="quiz__question-checkbox" text="Answer 2" />-->
-                    <!--</VBox>-->
-                </VBox>
+                <VBox fx:id="questionsContainer" styleClass="quiz__questions" HBox.hgrow="ALWAYS" />
                 <HBox alignment="CENTER_LEFT">
-                    <Button fx:id="evaluateButton" mnemonicParsing="false" onAction="#evaluateGivenAnswers" prefWidth="384" styleClass="button, button-primary, quiz__evaluate" text="Evaluate given answers" />
+                    <Button fx:id="evaluateButton" mnemonicParsing="false" onAction="#evaluateGivenAnswers" prefWidth="384" styleClass="button, button-primary, quiz__evaluate" text="Evaluate the given answers" />
                 </HBox>
             </VBox>
         </ScrollPane>
