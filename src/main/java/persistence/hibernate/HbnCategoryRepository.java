@@ -10,7 +10,14 @@ import javax.persistence.criteria.ParameterExpression;
 import javax.persistence.criteria.Root;
 import java.util.List;
 
+/**
+ * The Hibernate {@link Categoryer} repository that implements the
+ * {@link CategoryRepository} methods.
+ */
 public class HbnCategoryRepository extends HbnRepository<Category> implements CategoryRepository {
+    /**
+     * Construct a {@link HbnRepository} for the {@link Category} entity.
+     */
     public HbnCategoryRepository() {
         super(Category.class);
     }

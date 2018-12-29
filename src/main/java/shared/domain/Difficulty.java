@@ -7,7 +7,7 @@ import javax.persistence.*;
  * Each {@link Quiz} can be taken in different levels of difficulty,
  * which can influence the outcome.
  * <br/><br/>
- * For example: each difficulty level has a time modifier.
+ * <i>Example:</i> each difficulty level has a time modifier.
  */
 @Entity
 @Table(name = "difficulty")

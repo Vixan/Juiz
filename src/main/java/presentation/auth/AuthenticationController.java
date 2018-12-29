@@ -19,7 +19,7 @@ public class AuthenticationController {
         String username = usernameInput.getText().trim();
         String password = passwordInput.getText();
 
-        User user = authenticationService.login(username, password);
+        User user = authenticationService.signIn(username, password);
         if (user == null) {
             errorLabel.setVisible(true);
         } else {

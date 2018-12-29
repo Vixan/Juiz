@@ -8,6 +8,12 @@ import shared.domain.Quiz;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Provides methods for communication with
+ * the Hibernate {@link Quiz} repository.
+ *
+ * @see Service
+ */
 public class QuizService implements Service<Quiz> {
     private HbnQuizRepository quizRepository = new HbnQuizRepository();
 

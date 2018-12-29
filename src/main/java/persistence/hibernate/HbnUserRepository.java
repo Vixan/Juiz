@@ -10,7 +10,14 @@ import javax.persistence.criteria.ParameterExpression;
 import javax.persistence.criteria.Root;
 import java.util.List;
 
+/**
+ * The Hibernate {@link User} repository that implements the
+ * {@link UserRepository} methods.
+ */
 public class HbnUserRepository extends HbnRepository<User> implements UserRepository {
+    /**
+     * Construct a {@link HbnRepository} for the {@link User} entity.
+     */
     public HbnUserRepository() {
         super(User.class);
     }

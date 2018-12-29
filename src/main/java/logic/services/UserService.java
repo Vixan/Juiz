@@ -8,6 +8,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * Provides methods for communication with
+ * the Hibernate {@link User} repository.
+ *
+ * @see Service
+ */
 public class UserService implements Service<User> {
     private HbnUserRepository userRepository = new HbnUserRepository();
 
@@ -20,6 +26,11 @@ public class UserService implements Service<User> {
         return user;
     }
 
+    /**
+     * @param userName the name of the user to be retrieved.
+     * @return the user with the searched name or <b>null</b> if
+     * not found.
+     */
     public User getByName(String userName) {
         userRepository.openCurrentSession();
         User user = userRepository.getByName(userName);

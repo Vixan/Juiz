@@ -6,6 +6,12 @@ import shared.domain.Difficulty;
 
 import java.util.List;
 
+/**
+ * Provides methods for communication with
+ * the Hibernate {@link Difficulty} repository.
+ *
+ * @see Service
+ */
 public class DifficultyService implements Service<Difficulty> {
     private HbnDifficultyRepository difficultyRepository = new HbnDifficultyRepository();
 

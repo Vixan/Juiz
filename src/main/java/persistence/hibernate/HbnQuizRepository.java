@@ -10,7 +10,14 @@ import javax.persistence.criteria.ParameterExpression;
 import javax.persistence.criteria.Root;
 import java.util.List;
 
+/**
+ * The Hibernate {@link Quiz} repository that implements the
+ * {@link QuizRepository} methods.
+ */
 public class HbnQuizRepository extends HbnRepository<Quiz> implements QuizRepository {
+    /**
+     * Construct a {@link HbnRepository} for the {@link Quiz} entity.
+     */
     public HbnQuizRepository() {
         super(Quiz.class);
     }

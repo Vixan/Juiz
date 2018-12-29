@@ -3,6 +3,7 @@ package persistence.hibernate;
 import org.mindrot.jbcrypt.BCrypt;
 import persistence.abstractions.PersistenceContext;
 import shared.domain.*;
+import shared.abstractions.Initializer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +25,14 @@ public class HbnPersistenceContext implements PersistenceContext {
 
     /**
      * Fill the database with initial data.
+     *
+     * @see Initializer
+     * @see User
+     * @see Category
+     * @see Difficulty
+     * @see Quiz
+     * @see Question
+     * @see Answer
      */
     public void initialize() {
         quizRepository.openCurrentSession();
@@ -44,6 +53,7 @@ public class HbnPersistenceContext implements PersistenceContext {
      * Create a list of initial users and write them to the database.
      *
      * @return the list of initial users.
+     * @see User
      */
     private ArrayList<User> loadInitialUsers() {
         userRepository.openCurrentSessionWithTransaction();
@@ -82,6 +92,7 @@ public class HbnPersistenceContext implements PersistenceContext {
      * Create a list of initial quiz categories and write them to the database.
      *
      * @return the list of initial quiz categories.
+     * @see Category
      */
     private ArrayList<Category> loadInitialCategories() {
         categoryRepository.openCurrentSessionWithTransaction();
@@ -112,6 +123,7 @@ public class HbnPersistenceContext implements PersistenceContext {
      * Create a list of initial quiz difficulty levels and write them to the database.
      *
      * @return the list of initial quiz difficulties.
+     * @see Difficulty
      */
     private ArrayList<Difficulty> loadInitialDifficulties() {
         difficultyRepository.openCurrentSessionWithTransaction();
@@ -150,6 +162,7 @@ public class HbnPersistenceContext implements PersistenceContext {
      *
      * @param initialCategories categories that the initial quizzes are part of.
      * @return the list of initial quizzes.
+     * @see Quiz
      */
     private ArrayList<Quiz> loadInitialQuizzes(List<Category> initialCategories) {
         quizRepository.openCurrentSessionWithTransaction();
@@ -213,6 +226,7 @@ public class HbnPersistenceContext implements PersistenceContext {
      *
      * @param initialQuizzes quizzes that the initial questions are part of.
      * @return the list of initial questions.
+     * @see Question
      */
     private ArrayList<Question> loadInitialQuestions(List<Quiz> initialQuizzes) {
         questionRepository.openCurrentSessionWithTransaction();
@@ -269,6 +283,7 @@ public class HbnPersistenceContext implements PersistenceContext {
      *
      * @param initialQuestions questions that the initial answers are part of.
      * @return the list of initial answers.
+     * @see Answer
      */
     private ArrayList<Answer> loadInitialAnswers(List<Question> initialQuestions) {
         answerRepository.openCurrentSessionWithTransaction();

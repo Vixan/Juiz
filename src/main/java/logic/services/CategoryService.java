@@ -6,6 +6,12 @@ import shared.domain.Category;
 
 import java.util.List;
 
+/**
+ * Provides methods for communication with
+ * the Hibernate {@link Category} repository.
+ *
+ * @see Service
+ */
 public class CategoryService implements Service<Category> {
     private HbnCategoryRepository categoryRepository = new HbnCategoryRepository();
 

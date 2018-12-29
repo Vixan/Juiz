@@ -10,12 +10,19 @@ import javax.persistence.criteria.ParameterExpression;
 import javax.persistence.criteria.Root;
 import java.util.List;
 
+/**
+ * The Hibernate {@link Difficulty} repository that implements the
+ * {@link DifficultyRepository} methods.
+ */
 public class HbnDifficultyRepository extends HbnRepository<Difficulty> implements DifficultyRepository {
+    /**
+     * Construct a {@link HbnRepository} for the {@link Difficulty} entity.
+     */
     public HbnDifficultyRepository() {
         super(Difficulty.class);
     }
 
-    public Difficulty getByName(String userName) {
+    public Difficulty getByName(String difficultyName) {
         CriteriaBuilder criteriaBuilder = getCurrentSession().getCriteriaBuilder();
         CriteriaQuery<Difficulty> criteriaQuery = criteriaBuilder.createQuery(Difficulty.class);
 
@@ -26,7 +33,7 @@ public class HbnDifficultyRepository extends HbnRepository<Difficulty> implement
         criteriaQuery.where(criteriaBuilder.equal(root.get("name"), params));
 
         TypedQuery<Difficulty> typedQuery = getCurrentSession().createQuery(criteriaQuery);
-        typedQuery.setParameter(params, userName);
+        typedQuery.setParameter(params, difficultyName);
 
         List<Difficulty> searchedDifficulties = typedQuery.getResultList();
         Difficulty difficulty = null;
