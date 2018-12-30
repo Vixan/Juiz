@@ -1,62 +1,50 @@
 # Juiz
 
+<div style="text-align: center;">
+    <img src ="src\main\resources\presentation\assets\juiz.icon.png" />
+</div>
+
 Juiz is a simple desktop quiz application written in Java.
 
 ## Description
 
-An in-depth paragraph about your project and overview of use.
+With Juiz, one can create and test the knowledge with quizzes from different categories, 
+as well as visualize the result for each question of the taken quiz.
+
+The application provides a minimal level of security using a basic user authentication mechanism.
 
 ## Getting Started
 
 ### Dependencies
 
-* Describe any prerequisites, libraries, OS version, etc., needed before installing program.
-* ex. Windows 10
+* Hibernate ORM 
+  - [Hibernate Website](http://hibernate.org/orm/) 
+  - [Hibernate Maven repository](https://mvnrepository.com/artifact/org.hibernate/hibernate-core)
+* H2 Database Engine
+  - [H2 Database Website](http://www.h2database.com) 
+  - [H2 Database Maven repository](https://mvnrepository.com/artifact/com.h2database/h2)
+* JBCrypt
+  - [Mindrot Website](https://www.mindrot.org/projects/jBCrypt/)
+  - [JBCrypt Maven repository](https://mvnrepository.com/artifact/org.mindrot/jbcrypt)
 
 ### Installing
 
-* How/where to download your program
-* Any modifications needed to be made to files/folders
-
-### Executing program
-
-* How to run the program
-* Step-by-step bullets
-```
-code blocks for commands
-```
-
-## Help
-
-Any advise for common problems or issues.
-```
-command to run if program contains helper info
-```
-
-## Authors
-
-Contributors names and contact info
-
-ex. Dominique Pizzie  
-ex. [@DomPizzie](https://twitter.com/dompizzie)
-
-## Version History
-
-* 0.2
-    * Various bug fixes and optimizations
-    * See [commit change]() or See [release history]()
-* 0.1
-    * Initial Release
+* Download the project using the **Download ZIP** button on the GitHub page.
+* Clone the git project as follows
+  1. Download Git from https://git-scm.com
+  2. Clone the project in the desired directory on your computer using:
+  ```
+  git clone https://github.com/Vixan/Juiz.git
+  ```
 
 ## License
 
-This project is licensed under the [NAME HERE] License - see the LICENSE.md file for details
+This project is licensed under the MIT License - see the LICENSE file for details
 
 ## Acknowledgments
 
 Inspiration, code snippets, etc.
-* [awesome-readme](https://github.com/matiassingers/awesome-readme)
-* [PurpleBooth](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2)
-* [dbader](https://github.com/dbader/readme-template)
-* [zenorocha](https://gist.github.com/zenorocha/4526327)
-* [fvcproductions](https://gist.github.com/fvcproductions/1bfc2d4aecb01a834b46)
+* [Medium](https://medium.com)
+* [StackOverflow](https://stackoverflow.com)
+* [Code Ranch](https://coderanch.com)
+* [JavaFX Subreddit](https://www.reddit.com/r/JavaFX)
