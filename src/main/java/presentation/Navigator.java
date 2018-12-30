@@ -14,6 +14,12 @@ import shared.utils.ConfigProperties;
 import java.io.IOException;
 import java.util.Map;
 
+/**
+ * The singleton in charge of view loading.
+ * All views are displayed using this class.
+ *
+ * @see ConfigProperties
+ */
 public class Navigator {
     private static final String ICON_PATH = "/presentation/assets/juiz.icon.png";
     private static final String AUTHENTICATION_VIEW_PATH = "/presentation/auth/auth.fxml";
@@ -25,6 +31,13 @@ public class Navigator {
     private static Navigator instance = null;
     private Stage rootStage = null;
 
+    /**
+     * Retrieve the {@link Navigator} singleton instance.
+     * If it does not exist, a new one will be created.
+     *
+     * @return the navigator instance.
+     * @see Stage
+     */
     public static Navigator getInstance() {
         if (instance == null) {
             instance = new Navigator();
@@ -35,6 +48,15 @@ public class Navigator {
         return instance;
     }
 
+    /**
+     * Initialize the JavaFX {@link Stage} with the
+     * default {@link ConfigProperties} and display the empty window.
+     * The main views will be loaded in the same root stage, such that no new
+     * windows will be created.
+     *
+     * @see Stage
+     * @see Navigator
+     */
     private void initStage() {
         int windowWidth = 800;
         int windowHeight = 600;
@@ -53,6 +75,12 @@ public class Navigator {
         instance.rootStage.show();
     }
 
+    /**
+     * Load the FXML authentication view from the .fxml file using the JavaFX {@link FXMLLoader}.
+     *
+     * @see Scene
+     * @see Navigator
+     */
     public void showAuthentication() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
@@ -66,6 +94,13 @@ public class Navigator {
         }
     }
 
+    /**
+     * Load the FXML dashboard view from the .fxml file using the JavaFX {@link FXMLLoader}.
+     *
+     * @param user the authenticated {@link User}.
+     * @see Scene
+     * @see Navigator
+     */
     public void showDashboard(User user) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
@@ -82,6 +117,13 @@ public class Navigator {
         }
     }
 
+    /**
+     * Load the FXML quiz view from the .fxml file using the JavaFX {@link FXMLLoader}.
+     *
+     * @param quiz       the started {@link Quiz}.
+     * @param difficulty the selected {@link Difficulty} level.
+     * @param user       the authenticated {@link User}.
+     */
     public void showQuiz(Quiz quiz, Difficulty difficulty, User user) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
@@ -98,6 +140,15 @@ public class Navigator {
         }
     }
 
+    /**
+     * Load the FXML quiz results view from the .fxml file using the JavaFX {@link FXMLLoader}.
+     *
+     * @param quiz    the taken {@link Quiz}.
+     * @param user    the authenticated {@link User}.
+     * @param results the results for each {@link Question}.
+     * @see ResultsController
+     * @see Scene
+     */
     public void showResults(Quiz quiz, User user, Map<Question, Boolean> results) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
@@ -114,6 +165,12 @@ public class Navigator {
         }
     }
 
+    /**
+     * Retrieve the root {@link Stage} of the application, where
+     * the main views are loaded.
+     *
+     * @return the root stage of the application.
+     */
     public Stage getRootStage() {
         return rootStage;
     }

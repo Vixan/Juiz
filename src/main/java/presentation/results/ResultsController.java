@@ -9,9 +9,14 @@ import presentation.Navigator;
 import shared.domain.Question;
 import shared.domain.User;
 import shared.domain.Quiz;
+import shared.domain.Answer;
 
 import java.util.Map;
 
+/**
+ * The controller bound to the results view.
+ * Any logic regarding the view like event handling is coded in this class.
+ */
 public class ResultsController {
     public Label quizTitleLabel;
     public VBox validatedQuestionsContainer;
@@ -21,6 +26,13 @@ public class ResultsController {
     private User currentUser;
     private Map<Question, Boolean> validatedQuestions;
 
+    /**
+     * Initialize the view with data and setup event handlers.
+     *
+     * @param quiz    the taken {@link Quiz}.
+     * @param user    the authenticated {@link User}.
+     * @param results the results for each {@link Question}.
+     */
     public void init(Quiz quiz, User user, Map<Question, Boolean> results) {
         currentQuiz = quiz;
         currentUser = user;
@@ -29,6 +41,14 @@ public class ResultsController {
         drawResults();
     }
 
+    /**
+     * Draw the results for each {@link Question}, specifying whether the {@link User}
+     * has given correct answers or not.
+     *
+     * @see Answer
+     * @see HBox
+     * @see Label
+     */
     private void drawValidatedQuestions() {
         for (Question question : validatedQuestions.keySet()) {
             HBox questionContainer = new HBox();
@@ -52,6 +72,9 @@ public class ResultsController {
         }
     }
 
+    /**
+     * Draw the resulting score to the view.
+     */
     private void drawResults() {
         quizTitleLabel.setText(currentQuiz.getName());
         int correctQuestionsCount = validatedQuestions.values().stream()
@@ -61,6 +84,12 @@ public class ResultsController {
         drawValidatedQuestions();
     }
 
+    /**
+     * Return to the dashboard view.
+     *
+     * @see Navigator
+     * @see User
+     */
     public void returnToQuizzes() {
         Navigator.getInstance().showDashboard(currentUser);
     }

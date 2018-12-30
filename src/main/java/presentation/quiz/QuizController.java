@@ -16,6 +16,10 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
+/**
+ * The controller bound to the quiz view.
+ * Any logic regarding the view like event handling is coded in this class.
+ */
 public class QuizController {
     public ProgressBar timeProgressBar;
     public VBox questionsContainer;
@@ -29,16 +33,19 @@ public class QuizController {
     private List<CheckBox> answerCheckboxes = new ArrayList<>();
     private ScheduledExecutorService timer;
 
+    /**
+     * Initialize the view with data and setup event handlers.
+     *
+     * @param quiz       the started {@link Quiz}.
+     * @param difficulty the selected {@link Difficulty}
+     * @param user       the authenticated {@link User}
+     */
     public void init(Quiz quiz, Difficulty difficulty, User user) {
         selectedDifficulty = difficulty;
         currentUser = user;
         currentQuiz = quiz;
         currentQuiz.setTimeLimit((int) (currentQuiz.getTimeLimit() / selectedDifficulty.getModifier()));
 
-        drawQuiz();
-    }
-
-    private void drawQuiz() {
         titleLabel.setText(currentQuiz.getName());
         drawQuestions();
 
@@ -46,6 +53,16 @@ public class QuizController {
         Navigator.getInstance().getRootStage().setOnCloseRequest(event -> timer.shutdown());
     }
 
+    /**
+     * Draw the {@link Quiz} questions and the corresponding
+     * answers to the view.
+     *
+     * @see Question
+     * @see Answer
+     * @see VBox
+     * @see Label
+     * @see CheckBox
+     */
     private void drawQuestions() {
         for (Question question : currentQuiz.getQuestions()) {
             VBox questionContainer = new VBox();
@@ -66,6 +83,14 @@ public class QuizController {
         }
     }
 
+    /**
+     * Redraw the progress bar each second until the timer stops on zero.
+     *
+     * @see ProgressBar
+     * @see TimerTask
+     * @see Executors
+     * @see Platform
+     */
     private void redrawProgress() {
         TimerTask timerScheduledTask = new TimerTask() {
             int quizTimeLimit = currentQuiz.getTimeLimit();
@@ -92,11 +117,28 @@ public class QuizController {
         timer.scheduleAtFixedRate(timerScheduledTask, 0, 1000, TimeUnit.MILLISECONDS);
     }
 
+    /**
+     * Cancel taking the current {@link Quiz} and
+     * return to the dashboard view.<br/>
+     * The quiz timer is stopped.
+     *
+     * @see Navigator
+     * @see TimerTask
+     * @see Executors
+     */
     public void cancelQuiz() {
         timer.shutdown();
         Navigator.getInstance().showDashboard(currentUser);
     }
 
+    /**
+     * Evaluate the user selected answers for each {@link Question}
+     * and load the {@link Quiz} results view.<br/>
+     * The quiz timer is stopped.
+     *
+     * @see User
+     * @see Answer
+     */
     public void evaluateGivenAnswers() {
         List<CheckBox> selectedCheckboxes = answerCheckboxes.stream()
                 .filter(CheckBox::isSelected).collect(Collectors.toList());

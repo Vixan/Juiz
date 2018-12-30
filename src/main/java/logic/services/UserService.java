@@ -5,7 +5,6 @@ import persistence.hibernate.HbnUserRepository;
 import shared.domain.User;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 /**
