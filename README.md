@@ -1,8 +1,8 @@
 # Juiz
 
-<div style="text-align: center;">
+<p align="center">
     <img src ="src\main\resources\presentation\assets\juiz.icon.png" />
-</div>
+</p>
 
 Juiz is a simple desktop quiz application written in Java.
 
